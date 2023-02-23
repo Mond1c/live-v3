@@ -19,7 +19,6 @@ import PVP from "../organisms/widgets/PVP";
 import Locator from "../organisms/widgets/Locator";
 import { LOCATIONS } from "icpc-live-v3/src/locations";
 import { OVERLAY_VERSION } from "icpc-live-v3/src/config";
-import {OVERLAY_LOCATION} from "icpc-live-v3-admin/src/config";
 
 const fadeIn = keyframes`
   from {
@@ -41,8 +40,7 @@ const fadeOut = keyframes`
   }
 `;
 
-const WidgetWrap = styled.div.attrs(
-    ({left, top, width, height}) => {
+const WidgetWrap = styled.div.attrs(({ left, top, width, height }) => {
         return {
             style: {
                 left: left + "px",
@@ -66,9 +64,9 @@ const MainLayoutWrap = styled.div`
 `;
 
 const transitionProps = {
-    entering: {animation: fadeIn},
+    entering: { animation: fadeIn },
     entered: {},
-    exiting: {animation: fadeOut},
+    exiting: { animation: fadeOut },
     exited: {},
 };
 
@@ -111,7 +109,7 @@ export const MainLayout = () => {
                 if (Widget === undefined) {
                     return null;
                 }
-                const overrideLocation = OVERLAY_LOCATION === "2" ? (LOCATIONS[obj.type] ?? obj.location) : obj.location;
+                const overrideLocation = OVERLAY_VERSION === "2" ? (LOCATIONS[obj.type] ?? obj.location) : obj.location;
                 return <Transition key={obj.widgetId} timeout={Widget.overrideTimeout ?? WIDGET_TRANSITION_TIME}>
                     {state =>
                         state !== "exited" && <WidgetWrap
