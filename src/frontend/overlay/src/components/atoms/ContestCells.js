@@ -91,19 +91,6 @@ const VerdictCellICPC = ({ verdict, ...props }) => {
     </TextShrinkingCell>;
 };
 
-const VerdictCellICPC2 = ({ verdict, ...props }) => {
-    return <TextShrinkingCell
-        background={verdict.isAccepted ? VERDICT_OK : VERDICT_NOK}
-        align="center"
-        text={verdict.result}
-        canGrow={false}
-        canShrink={false}
-        {...props}
-    >
-        {verdict.isFirstToSolveRun && <StarIcon/>}
-    </TextShrinkingCell>;
-};
-
 const ICPCVerdict = PropTypes.shape({
     type: PropTypes.string.isRequired,
     isFirstToSolveRun: PropTypes.bool.isRequired,
