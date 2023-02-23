@@ -1,3 +1,6 @@
+// Version
+export const OVERLAY_VERSION = process.env.PUBLIC_URL === "/overlay2" ? "2" : "1";
+
 // Strings
 const WS_PROTO = window.location.protocol === "https:" ? "wss://" : "ws://";
 const WS_PORT = process.env.REACT_APP_WEBSOCKET_PORT ?? window.location.port;

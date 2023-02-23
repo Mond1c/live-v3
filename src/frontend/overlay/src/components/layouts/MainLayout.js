@@ -17,6 +17,9 @@ import TeamView from "../organisms/widgets/TeamView";
 import Videos from "../organisms/widgets/Videos";
 import PVP from "../organisms/widgets/PVP";
 import Locator from "../organisms/widgets/Locator";
+import { LOCATIONS } from "icpc-live-v3/src/locations";
+import { OVERLAY_VERSION } from "icpc-live-v3/src/config";
+import {OVERLAY_LOCATION} from "icpc-live-v3-admin/src/config";
 
 const fadeIn = keyframes`
   from {
@@ -39,13 +42,15 @@ const fadeOut = keyframes`
 `;
 
 const WidgetWrap = styled.div.attrs(
-    ({ left, top, width, height }) => {
-        return { style: {
-            left: left+"px",
-            top: top+"px",
-            width: width+"px",
-            height: height+"px"
-        } };
+    ({left, top, width, height}) => {
+        return {
+            style: {
+                left: left + "px",
+                top: top + "px",
+                width: width + "px",
+                height: height + "px"
+            }
+        };
     }
 )`
   position: absolute;
@@ -61,13 +66,27 @@ const MainLayoutWrap = styled.div`
 `;
 
 const transitionProps = {
-    entering: { animation: fadeIn },
-    entered:  {  },
-    exiting:  { animation: fadeOut },
-    exited:  { },
+    entering: {animation: fadeIn},
+    entered: {},
+    exiting: {animation: fadeOut},
+    exited: {},
 };
 
 const WIDGETS = {
+    AdvertisementWidget: Advertisement,
+    ScoreboardWidget: Scoreboard,
+    QueueWidget: Queue,
+    PictureWidget: Pictures,
+    SvgWidget: Svg,
+    VideoWidget: Videos,
+    TickerWidget: Ticker,
+    StatisticsWidget: Statistics,
+    TeamViewWidget: TeamView,
+    TeamPVPWidget: PVP,
+    TeamLocatorWidget: Locator
+};
+
+const WIDGETS2 = {
     AdvertisementWidget: Advertisement,
     ScoreboardWidget: Scoreboard,
     QueueWidget: Queue,
@@ -87,17 +106,19 @@ export const MainLayout = () => {
         <StatusLightbulbs compact={true}/>
         <TransitionGroup component={null}>
             {Object.values(widgets).map((obj) => {
-                const Widget = WIDGETS[obj.type];
-                if(Widget === undefined) {
+                //OVERLAY_VERSION ?
+                const Widget = (OVERLAY_VERSION === "2" ? WIDGETS2 : WIDGETS)[obj.type];
+                if (Widget === undefined) {
                     return null;
                 }
+                const overrideLocation = OVERLAY_LOCATION === "2" ? (LOCATIONS[obj.type] ?? obj.location) : obj.location;
                 return <Transition key={obj.widgetId} timeout={Widget.overrideTimeout ?? WIDGET_TRANSITION_TIME}>
                     {state =>
                         state !== "exited" && <WidgetWrap
-                            left={obj.location.positionX}
-                            top={obj.location.positionY}
-                            width={obj.location.sizeX}
-                            height={obj.location.sizeY}
+                            left={overrideLocation.positionX}
+                            top={overrideLocation.positionY}
+                            width={overrideLocation.sizeX}
+                            height={overrideLocation.sizeY}
                             {...(!Widget.ignoreAnimation && transitionProps[state])}
                         >
                             <Widget widgetData={obj} transitionState={state}/>

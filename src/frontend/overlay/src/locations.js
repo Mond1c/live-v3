@@ -1,8 +1,8 @@
 export const LOCATIONS = {
-    TimelineWidget: {
+    ScoreboardWidget: {
         positionX: 0,
         positionY: 0,
-        sizeX: 0,
-        sizeY: 0
+        sizeX: 1920,
+        sizeY: 1080,
     }
 };
