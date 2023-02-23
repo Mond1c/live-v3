@@ -9,12 +9,17 @@ const Background = styled.div`
   height: ${TIMELINE_HEIGHT};
   
   border-radius: 29px;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const Line = styled.div`
   background-color: white;
   
   width: ${TIMELINE_WIDTH};
+  height: 3px;
   
   border-radius: 5px;
 `;
@@ -24,6 +29,7 @@ const Line = styled.div`
 export const TimeLine = () => {
     return (
         <Background>
+            <Line />
         </Background>
     );
 };
