@@ -89,7 +89,7 @@ const StatisticsProblemCell = styled(ProblemCell)`
   box-sizing: border-box;
 `;
 
-const ScoreboardTimeCell = styled(ScoreboardCell)`
+export const ScoreboardTimeCell = styled(ScoreboardCell)`
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 100%;
