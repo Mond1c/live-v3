@@ -61,8 +61,6 @@ const VerdictCellProgressBar = styled.div.attrs(({ width }) => ({
         width
     }
 }))`
-  height: 13px;
-  border-radius: 16px;
   position: absolute;
   left: 0;
   background-color: ${VERDICT_UNKNOWN};
@@ -73,13 +71,27 @@ const VerdictCellProgressBar2 = styled.div.attrs(({ width }) => ({
         width
     }
 }))`
-  height: 100%;
+  height: 13px;
+  border-radius: 16px;
   position: absolute;
   left: 0;
   background-color: ${VERDICT_UNKNOWN};
 `;
 
 const VerdictCellICPC = ({ verdict, ...props }) => {
+    return <TextShrinkingCell
+        background={verdict.isAccepted ? VERDICT_OK : VERDICT_NOK}
+        align="center"
+        text={verdict.result}
+        canGrow={false}
+        canShrink={false}
+        {...props}
+    >
+        {verdict.isFirstToSolveRun && <StarIcon/>}
+    </TextShrinkingCell>;
+};
+
+const VerdictCellICPC2 = ({ verdict, ...props }) => {
     return <TextShrinkingCell
         background={verdict.isAccepted ? VERDICT_OK : VERDICT_NOK}
         align="center"
@@ -191,7 +203,7 @@ export const VerdictCell2 = ({
 }) => {
     console.log(data);
     if (data.result === undefined) {
-        return <VerdictCellInProgress percentage={data.percentage} {...props}/>;
+        return <VerdictCellInProgress2 percentage={data.percentage} {...props}/>;
     }
     if (data.result.type === "icpc") {
         return <VerdictCellICPC verdict={data.result} {...props} />;
