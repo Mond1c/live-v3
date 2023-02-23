@@ -22,6 +22,7 @@ const WidgetWrap = styled.div`
   position: relative;
 `;
 
+
 const QueueRowWrap = styled.div.attrs(({ bottom, zindex }) => ({
     style: {
         bottom: bottom + "px", zIndex: zindex
