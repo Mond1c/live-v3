@@ -26,8 +26,8 @@ import { formatScore } from "../../atoms/ContestCells";
 const QueueRowWrap = styled.div`
   background-color: ${(props) => props.background ?? ((props.isEven && CELL_BG_COLOR_ODD) || CELL_BG_COLOR)};
 
-  border-top-left-radius: 50%;
-  border-bottom-left-radius: 50%;
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
 
   height: ${QUEUE_ROW_HEIGHT}px;
   display: flex;

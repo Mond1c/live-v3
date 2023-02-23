@@ -61,12 +61,23 @@ const VerdictCellProgressBar = styled.div.attrs(({ width }) => ({
         width
     }
 }))`
-  height: 100%;
+  height: 13px;
+  border-radius: 16px;
   position: absolute;
   left: 0;
   background-color: ${VERDICT_UNKNOWN};
 `;
 
+const VerdictCellProgressBar2 = styled.div.attrs(({ width }) => ({
+    style: {
+        width
+    }
+}))`
+  height: 100%;
+  position: absolute;
+  left: 0;
+  background-color: ${VERDICT_UNKNOWN};
+`;
 
 const VerdictCellICPC = ({ verdict, ...props }) => {
     return <TextShrinkingCell
@@ -128,6 +139,10 @@ const VerdictCellInProgressWrap = styled(Cell)`
   position: relative;
 `;
 
+const VerdictCellInProgressWrap2 = styled(Cell)`
+  position: relative;
+`;
+
 const VerdictCellInProgress = ({ percentage, ...props }) => {
     return <VerdictCellInProgressWrap {...props} >
         {percentage !== 0 && <VerdictCellProgressBar width={percentage * 100 + "%"}/>}
@@ -135,6 +150,16 @@ const VerdictCellInProgress = ({ percentage, ...props }) => {
 };
 
 VerdictCellInProgress.PropTypes = {
+    percentage: PropTypes.number.isRequired
+};
+
+const VerdictCellInProgress2 = ({ percentage, ...props }) => {
+    return <VerdictCellInProgressWrap2 {...props} >
+        {percentage !== 0 && <VerdictCellProgressBar2 width={percentage * 100 + "%"}/>}
+    </VerdictCellInProgressWrap2>;
+};
+
+VerdictCellInProgress2.PropTypes = {
     percentage: PropTypes.number.isRequired
 };
 

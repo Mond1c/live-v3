@@ -78,7 +78,7 @@ export const CELL_BG_COLOR = "#000000";
 export const CELL_BG_COLOR_ODD = "rgba(1, 1, 1, 0.9)";
 
 export const CELL_PROBLEM_LINE_WIDTH = "5px"; // css property
-export const CELL_QUEUE_VERDICT_WIDTH = "27px"; // css property
+export const CELL_QUEUE_VERDICT_WIDTH = "50px"; // css property
 export const CELL_QUEUE_RANK_WIDTH = "50px"; // css property
 export const CELL_QUEUE_TOTAL_SCORE_WIDTH = "35px"; // css property
 export const CELL_QUEUE_TASK_WIDTH = "32px"; // css property
@@ -114,3 +114,5 @@ export const MEDAL_COLORS = Object.freeze({
 
 // Debug Behaviour
 export const LOG_LINES = 300;
+
+export const GLOBAL_BORDER_RADIUS = "16px";
