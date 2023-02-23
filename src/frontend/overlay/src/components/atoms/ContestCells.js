@@ -14,6 +14,7 @@ import {
 } from "../../config";
 import { Cell } from "./Cell";
 import { StarIcon } from "./Star";
+import { Cell2 } from "./Cell2";
 
 export const formatScore = (score, digits = 2) => {
     if (score === undefined) {
@@ -28,6 +29,11 @@ export const ProblemCellWrap = styled(Cell)`
   border-bottom: ${props => props.probColor} ${CELL_PROBLEM_LINE_WIDTH} solid;
 `;
 
+export const ProblemCellWrap2 = styled(Cell2)`
+  background-color: ${props => props.probColor};
+  border-radius: 100%;
+`;
+
 export const ProblemCell = ({ probData, ...props }) => {
     return <ProblemCellWrap probColor={probData?.color ?? "black"} {...props}>
         {probData?.letter ?? "??"}
@@ -35,6 +41,17 @@ export const ProblemCell = ({ probData, ...props }) => {
 };
 
 ProblemCell.propTypes = {
+    ...Cell.propTypes,
+    probData: PropTypes.object
+};
+
+export const ProblemCell2 = ({ probData, ...props }) => {
+    return <ProblemCellWrap2 probColor={probData?.color ?? "black"} {...props}>
+        {probData?.letter ?? "??"}
+    </ProblemCellWrap2>;
+};
+
+ProblemCell2.propTypes = {
     ...Cell.propTypes,
     probData: PropTypes.object
 };
@@ -143,6 +160,28 @@ VerdictCell.propTypes = {
         percentage: PropTypes.number.isRequired
     })
 };
+export const VerdictCell2 = ({
+    runData: data,
+    ...props
+}) => {
+    console.log(data);
+    if (data.result === undefined) {
+        return <VerdictCellInProgress percentage={data.percentage} {...props}/>;
+    }
+    if (data.result.type === "icpc") {
+        return <VerdictCellICPC verdict={data.result} {...props} />;
+    } else {
+        return <VerdictCellIOI verdict={data.result} {...props} />;
+    }
+};
+
+VerdictCell2.propTypes = {
+    ...Cell.propTypes,
+    runData: PropTypes.shape({
+        result: PropTypes.oneOf([IOIVerdict, ICPCVerdict]),
+        percentage: PropTypes.number.isRequired
+    })
+};
 
 const storage = window.localStorage;
 export const getTextWidth = (text, font) => {
@@ -222,6 +261,17 @@ export const RankCell = ({ rank, medal, ...props }) => {
 };
 
 RankCell.propTypes = {
+    ...Cell.propTypes,
+    rank: PropTypes.number
+};
+
+export const RankCell2 = ({ rank, medal, ...props }) => {
+    return <Cell2 background={MEDAL_COLORS[medal]} {...props}>
+        {rank ?? "??"}
+    </Cell2>;
+};
+
+RankCell2.propTypes = {
     ...Cell.propTypes,
     rank: PropTypes.number
 };

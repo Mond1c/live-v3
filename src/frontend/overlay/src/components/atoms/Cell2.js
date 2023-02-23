@@ -32,7 +32,6 @@ export const Cell2 = styled.div`
   box-sizing: border-box;
 
   color: ${CELL_TEXT_COLOR};
-  background-color: ${(props) => props.background ?? ((props.isEven && CELL_BG_COLOR_ODD) || CELL_BG_COLOR)};
 
   animation: ${props => props.flash ? flash : null} ${CELL_FLASH_PERIOD}ms linear infinite alternate-reverse;
 `;

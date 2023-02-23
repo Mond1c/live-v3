@@ -19,6 +19,7 @@ import PVP from "../organisms/widgets/PVP";
 import Locator from "../organisms/widgets/Locator";
 import { LOCATIONS } from "icpc-live-v3/src/locations";
 import { OVERLAY_VERSION } from "icpc-live-v3/src/config";
+import { Queue2 } from "../organisms/widgets/Queue2";
 
 const fadeIn = keyframes`
   from {
@@ -86,7 +87,7 @@ const WIDGETS = {
 const WIDGETS2 = {
     AdvertisementWidget: Advertisement,
     ScoreboardWidget: Scoreboard,
-    QueueWidget: Queue,
+    QueueWidget: Queue2,
     PictureWidget: Pictures,
     SvgWidget: Svg,
     VideoWidget: Videos,

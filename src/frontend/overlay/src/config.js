@@ -35,7 +35,7 @@ export const CELL_FLASH_PERIOD = 500; //ms
 // Styles
 
 export const GLOBAL_DEFAULT_FONT_FAMILY = "Helvetica, serif"; // css-property
-export const GLOBAL_DEFAULT_FONT_SIZE = "22pt"; // css-property
+export const GLOBAL_DEFAULT_FONT_SIZE = "18pt"; // css-property
 export const GLOBAL_DEFAULT_FONT = GLOBAL_DEFAULT_FONT_SIZE + " " + GLOBAL_DEFAULT_FONT_FAMILY; // css property MUST HAVE FONT SIZE
 
 export const VERDICT_OK = "#1b8041";
@@ -43,7 +43,7 @@ export const VERDICT_NOK = "#881f1b";
 export const VERDICT_UNKNOWN = "#a59e0c";
 
 
-export const QUEUE_ROW_HEIGHT = 41; // px
+export const QUEUE_ROW_HEIGHT = 32; // px
 export const QUEUE_FTS_PADDING = QUEUE_ROW_HEIGHT / 2; // px
 export const QUEUE_OPACITY = 0.95;
 export const QUEUE_FEATURED_RUN_ASPECT = 16 / 9;
@@ -72,16 +72,16 @@ export const STATISTICS_STATS_VALUE_COLOR = "#FFFFFF";
 
 
 export const CELL_FONT_FAMILY = GLOBAL_DEFAULT_FONT_FAMILY;
-export const CELL_FONT_SIZE = "22pt";
+export const CELL_FONT_SIZE = "18pt";
 export const CELL_TEXT_COLOR = "#FFFFFF";
 export const CELL_BG_COLOR = "#000000";
 export const CELL_BG_COLOR_ODD = "rgba(1, 1, 1, 0.9)";
 
 export const CELL_PROBLEM_LINE_WIDTH = "5px"; // css property
-export const CELL_QUEUE_VERDICT_WIDTH = "80px"; // css property
+export const CELL_QUEUE_VERDICT_WIDTH = "27px"; // css property
 export const CELL_QUEUE_RANK_WIDTH = "50px"; // css property
-export const CELL_QUEUE_TOTAL_SCORE_WIDTH = "50px"; // css property
-export const CELL_QUEUE_TASK_WIDTH = "50px"; // css property
+export const CELL_QUEUE_TOTAL_SCORE_WIDTH = "35px"; // css property
+export const CELL_QUEUE_TASK_WIDTH = "32px"; // css property
 
 export const CELL_NAME_LEFT_PADDING = "5px"; // css property
 export const CELL_NAME_RIGHT_PADDING = CELL_NAME_LEFT_PADDING; // css property
