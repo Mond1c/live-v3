@@ -41,16 +41,15 @@ const fadeOut = keyframes`
 `;
 
 const WidgetWrap = styled.div.attrs(({ left, top, width, height }) => {
-        return {
-            style: {
-                left: left + "px",
-                top: top + "px",
-                width: width + "px",
-                height: height + "px"
-            }
-        };
-    }
-)`
+    return {
+        style: {
+            left: left + "px",
+            top: top + "px",
+            width: width + "px",
+            height: height + "px"
+        }
+    };
+})`
   position: absolute;
   overflow: hidden;
   animation: ${props => props.animation} ${WIDGET_TRANSITION_TIME}ms linear;
