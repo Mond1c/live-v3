@@ -290,7 +290,6 @@ RankCell.propTypes = {
 
 
 export const GetStatusCell = ({ data, score, ...props }) => {
-    console.log("score", score, data);
     return data.type === "icpc" ? <ICPCScoreCell score={score} color={TeamTaskColor[score === "AC" ? TeamTaskStatus.solved : TeamTaskStatus.failed]} {...props}/> :
         <ICPCScoreCell score={data.difference > 0 ? `+${formatScore(data.difference, 1)}` : (data.difference < 0 ? `-${formatScore(-data.difference, 1)}` : "=")} color={data.difference > 0 ? VERDICT_OK : (data.difference < 0 ? VERDICT_NOK : VERDICT_UNKNOWN)} {...props}/>;
 };
@@ -300,10 +299,7 @@ const ScoreCell = styled(Cell2)`
   
 `;
 
-
-
 export const ICPCScoreCell = ({ score, color, background, ...props }) => {
-
     return <ScoreCell {...props}><TextShrinking canGrow={false} canShrink={false} text={ score ?? "??" } color={ color ?? CELL_TEXT_COLOR } background={background}/></ScoreCell>;
 };
 
