@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import {
-    CELL_BG_COLOR,
     SCOREBOARD_HEADER_BG_COLOR,
     SCOREBOARD_HEADER_TITLE_BG_COLOR,
     SCOREBOARD_HEADER_TITLE_BG_GREEN_COLOR,
@@ -15,13 +14,11 @@ import {
     SCOREBOARD_ROW_TRANSITION_TIME,
     SCOREBOARD_SCROLL_INTERVAL,
     SCOREBOARD_SUM_PEN_WIDTH,
-    VERDICT_NOK,
-    VERDICT_OK,
-    VERDICT_UNKNOWN
 } from "../../../config";
 import { Cell } from "../../atoms/Cell";
 import { formatScore, ProblemCell, RankCell, TextShrinkingCell } from "../../atoms/ContestCells";
 import { StarIcon } from "../../atoms/Star";
+import { getStatus, getTeamTaskColor, TeamTaskColor, TeamTaskStatus, TeamTaskSymbol } from "../../../utils/statusInfo";
 
 
 const ScoreboardWrap = styled.div`
@@ -68,78 +65,10 @@ const ScoreboardTaskCellWrap = styled(ScoreboardCell)`
   flex-basis: 100%;
 `;
 
-const TeamTaskStatus = Object.freeze({
-    solved: 1,
-    failed: 2,
-    untouched: 3,
-    unknown: 4,
-    first: 5
-});
-
-const TeamTaskSymbol = Object.freeze({
-    [TeamTaskStatus.solved]: "+",
-    [TeamTaskStatus.failed]: "-",
-    [TeamTaskStatus.untouched]: "",
-    [TeamTaskStatus.unknown]: "?",
-    [TeamTaskStatus.first]: "+",
-});
-
-const TeamTaskColor = Object.freeze({
-    [TeamTaskStatus.solved]: VERDICT_OK,
-    [TeamTaskStatus.failed]: VERDICT_NOK,
-    [TeamTaskStatus.untouched]: undefined,
-    [TeamTaskStatus.unknown]: VERDICT_UNKNOWN,
-    [TeamTaskStatus.first]: VERDICT_OK,
-});
-
-const mapNumber = (value, oldMin, oldMax, newMin, newMax) => {
-    const result = (value - oldMin) * (newMax - newMin) / (oldMax - oldMin) + newMin;
-    return Math.min(Math.max(result, newMin), newMax);
-};
 
 // Green color: #1B8041, RGB(27, 128, 65) (VERDICT_OK)
 // Red color: #881f1b, RGB(136, 31, 27) (VERDICT_NOK)
-const getTeamTaskColor = (score, minScore, maxScore) => {
-    if (score === undefined) {
-        return CELL_BG_COLOR;
-    }
-    if (minScore !== undefined && maxScore !== undefined) {
-        const [minRed, minGreen, minBlue] = [136, 31, 27];
-        const [maxRed, maxGreen, maxBlue] = [27, 128, 65];
 
-        const scoreDiff = maxScore - minScore;
-        const redDiff = maxRed - minRed;
-        const greenDiff = maxGreen - minGreen;
-        const blueDiff = maxBlue - minBlue;
-
-        const middleRange = mapNumber(score, minScore, maxScore, 0, Math.PI);
-        const middleFactor = 90;
-
-        const [red, green, blue] = [
-            Math.min(minRed + score * (redDiff / scoreDiff) + (middleFactor * Math.sin(middleRange)), 255),
-            Math.min(minGreen + score * (greenDiff / scoreDiff) + (middleFactor * Math.sin(middleRange)), 255),
-            Math.min(minBlue + score * (blueDiff / scoreDiff) + ((middleFactor * Math.sin(middleRange)) / 10), 255)
-        ];
-
-        return `#${((1 << 24) + (red << 16) + (green << 8) + blue).toString(16).slice(1, 7)}`;
-    }
-
-    return undefined;
-};
-
-function getStatusICPC(isFirstToSolve, isSolved, pendingAttempts, wrongAttempts) {
-    if (isFirstToSolve) {
-        return TeamTaskStatus.first;
-    } else if (isSolved) {
-        return TeamTaskStatus.solved;
-    } else if (pendingAttempts > 0) {
-        return TeamTaskStatus.unknown;
-    } else if (wrongAttempts > 0) {
-        return TeamTaskStatus.failed;
-    } else {
-        return TeamTaskStatus.untouched;
-    }
-}
 
 const ScoreboardICPCTaskCell = ({ status, attempts }) => {
     return <ScoreboardTaskCellWrap background={TeamTaskColor[status]}>
@@ -148,6 +77,7 @@ const ScoreboardICPCTaskCell = ({ status, attempts }) => {
         {status !== TeamTaskStatus.untouched && attempts > 0 && attempts}
     </ScoreboardTaskCellWrap>;
 };
+
 
 export const ScoreboardIOITaskCell = ({ score, minScore, maxScore, ...props }) => {
     return <ScoreboardTaskCellWrap background={getTeamTaskColor(score, minScore, maxScore)} {...props}>
@@ -171,7 +101,7 @@ ScoreboardIOITaskCell.propTypes = {
 const RenderScoreboardTaskCell = ({ data, ...props }) => {
     if (data.type === "icpc") {
         return <ScoreboardICPCTaskCell
-            status={getStatusICPC(data.isFirstToSolve, data.isSolved, data.pendingAttempts, data.wrongAttempts)}
+            status={getStatus(data.isFirstToSolve, data.isSolved, data.pendingAttempts, data.wrongAttempts)}
             attempts={data.wrongAttempts + data.pendingAttempts}
             {...props}
         />;

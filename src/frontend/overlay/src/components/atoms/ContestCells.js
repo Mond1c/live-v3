@@ -15,7 +15,7 @@ import {
 import { Cell } from "./Cell";
 import { StarIcon } from "./Star";
 import { Cell2, TextShrinking } from "./Cell2";
-import { getStatus, getTeamTaskColor, TeamTaskColor, TeamTaskStatus } from "../../utils/statusInfo";
+import { getTeamTaskColor, TeamTaskColor, TeamTaskStatus } from "../../utils/statusInfo";
 
 export const formatScore = (score, digits = 2) => {
     if (score === undefined) {
@@ -196,7 +196,7 @@ export const VerdictCell2 = ({
         return <VerdictCellInProgress2 percentage={data.percentage} {...props}/>;
     }
 
-    return <VerdictCellInProgress2 percentage={1} {...props}/>;/*<GetStatusCell data={data.result} score={data.result.result} {...props}/>;*/
+    return <GetStatusCell data={data.result} score={data.result.result} {...props}/>;
 };
 
 VerdictCell2.propTypes = {
