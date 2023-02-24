@@ -208,9 +208,9 @@ export const TeamInfo = ({ teamId }) => {
             {scoreboardData === null ? null : formatScore(scoreboardData?.totalScore, 1)}
         </ScoreboardStatCell>
         {scoreboardData?.problemResults[0].type !== "ioi" &&
-        <ScoreboardStatCell>
-            {scoreboardData?.penalty}
-        </ScoreboardStatCell>}
+            <ScoreboardStatCell>
+                {scoreboardData?.penalty}
+            </ScoreboardStatCell>}
 
     </TeamInfoWrapper>;
 };
