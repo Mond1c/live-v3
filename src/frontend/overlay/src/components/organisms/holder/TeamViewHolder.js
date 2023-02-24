@@ -18,6 +18,7 @@ import { ProblemCell, RankCell, TextShrinkingCell } from "../../atoms/ContestCel
 import { StarIcon } from "../../atoms/Star";
 import { formatScore } from "../../atoms/ContestCells";
 import { ScoreboardIOITaskCell } from "../widgets/Scoreboard";
+import { Cell2 } from "../../atoms/Cell2";
 
 const NUMWIDTH = 80;
 const NAMEWIDTH = 300;
@@ -97,6 +98,17 @@ export const ScoreboardTimeCell = styled(ScoreboardCell)`
   padding: 5px;
   padding-left: 10px;
   min-width: 40px;
+`;
+
+export const TimeCell = styled(Cell2)`
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 100%;
+  height: 100%;
+  min-width: 40px;
+  padding-top: 5px;
+  opacity: 100%;
+  font-size: 12pt;
 `;
 
 export function getStatus(isFirstToSolve, isSolved, pendingAttempts, wrongAttempts) {

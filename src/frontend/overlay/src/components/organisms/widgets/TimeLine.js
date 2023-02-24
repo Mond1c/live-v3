@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Run } from "../../molecules/timeline/Run";
 
 const Background = styled.div`
-  background-color: black;
+  background-color: gray;
   
   width: ${TIMELINE_WIDTH};
   height: ${TIMELINE_HEIGHT};
@@ -31,7 +31,12 @@ export const TimeLine = () => {
     return (
         <Background>
             <Line />
-            <Run task="sdf" time="42px"/>
+            <Run task="sdf" time="42px" lastSubmitTimeMs={16422443}/>
+            <Run task="sdf" time="42px" lastSubmitTimeMs={12422443}/>
+            <Run task="sdf" time="42px" lastSubmitTimeMs={15422443}/>
+            <Run task="sdf" time="42px" lastSubmitTimeMs={6422443}/>
+            <Run task="sdf" time="42px" lastSubmitTimeMs={9422443}/>
+            <Run task="sdf" time="42px" lastSubmitTimeMs={2422443}/>
         </Background>
     );
 };

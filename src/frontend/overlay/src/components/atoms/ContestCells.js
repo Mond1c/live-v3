@@ -287,8 +287,6 @@ RankCell.propTypes = {
     rank: PropTypes.number
 };
 
-
-
 export const GetStatusCell = ({ data, score, ...props }) => {
     return data.type === "icpc" ? <ICPCScoreCell score={score} color={TeamTaskColor[score === "AC" ? TeamTaskStatus.solved : TeamTaskStatus.failed]} {...props}/> :
         <ICPCScoreCell score={data.difference > 0 ? `+${formatScore(data.difference, 1)}` : (data.difference < 0 ? `-${formatScore(-data.difference, 1)}` : "=")} color={data.difference > 0 ? VERDICT_OK : (data.difference < 0 ? VERDICT_NOK : VERDICT_UNKNOWN)} {...props}/>;
