@@ -19,7 +19,6 @@ import { StarIcon } from "../../atoms/Star";
 import { formatScore } from "../../atoms/ContestCells";
 import { ScoreboardIOITaskCell } from "../widgets/Scoreboard";
 import { Cell2 } from "../../atoms/Cell2";
-import SubmissionRow from "../../molecules/info/SubmissionRow";
 
 const NUMWIDTH = 80;
 const NAMEWIDTH = 300;
@@ -91,6 +90,16 @@ const StatisticsProblemCell = styled(ProblemCell)`
   box-sizing: border-box;
 `;
 
+export const ScoreboardTimeCell = styled(ScoreboardCell)`
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 100%;
+  height: 100%;
+  padding: 5px;
+  padding-left: 10px;
+  min-width: 40px;
+`;
+
 export const TimeCell = styled(Cell2)`
   flex-grow: 1;
   flex-shrink: 1;
@@ -100,16 +109,6 @@ export const TimeCell = styled(Cell2)`
   padding-top: 5px;
   opacity: 100%;
   font-size: 12pt;
-`;
-
-export const ScoreboardTimeCell = styled(ScoreboardCell)`
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 100%;
-  height: 100%;
-  padding: 5px;
-  padding-left: 10px;
-  min-width: 40px;
 `;
 
 export function getStatus(isFirstToSolve, isSolved, pendingAttempts, wrongAttempts) {
@@ -170,13 +169,12 @@ const ScoreboardColumn = ({ teamId, isSmall }) => {
                 index
             }, i) =>
                 getStatus(isFirstToSolve, isSolved, pendingAttempts, wrongAttempts) === TeamTaskStatus.untouched ? null :
-                    <TaskRow key={i}><SubmissionRow lastSubmitTimeMs={lastSubmitTimeMs} backgroundColor={tasks[index]?.color ?? "black"} taskName={tasks[index]?.letter}/></TaskRow>
-                    /*<TaskRow key={i}>
+                    <TaskRow key={i}>
                         <ScoreboardTimeCell>{DateTime.fromMillis(lastSubmitTimeMs).toFormat("H:mm")}</ScoreboardTimeCell>
                         <StatisticsProblemCell probData={tasks[index]}/>
                         <ScoreboardTaskCell status={getStatus(isFirstToSolve, isSolved, pendingAttempts, wrongAttempts)}
                             attempts={wrongAttempts + pendingAttempts}/>
-                    </TaskRow>*/
+                    </TaskRow>
             )}
         </ScoreboardColumnWrapper>;
     } else {
@@ -187,11 +185,14 @@ const ScoreboardColumn = ({ teamId, isSmall }) => {
             {_.sortBy(scoreboardData?.problemResults, "lastSubmitTimeMs").flatMap(({
                 score,
                 lastSubmitTimeMs,
-                index,
-                color
+                index
             }, i) =>
                 (score === undefined || lastSubmitTimeMs === undefined) ? null :
-                    <TaskRow key={i}><SubmissionRow lastSubmitTimeMs={lastSubmitTimeMs} backgroundColor={color ?? "black"} taskName={tasks[index]?.letter}/></TaskRow>
+                    <TaskRow key={i}>
+                        <ScoreboardTimeCell>{DateTime.fromMillis(lastSubmitTimeMs).toFormat("H:mm")}</ScoreboardTimeCell>
+                        <StatisticsProblemCell probData={tasks[index]}/>
+                        <ScoreboardIOITaskCell width={CELL_QUEUE_VERDICT_WIDTH} score={score}  minScore={contestData?.problems[index]?.minScore} maxScore={contestData?.problems[index]?.maxScore}/>
+                    </TaskRow>
             )}
         </ScoreboardColumnWrapper>;
     }
@@ -207,9 +208,9 @@ export const TeamInfo = ({ teamId }) => {
             {scoreboardData === null ? null : formatScore(scoreboardData?.totalScore, 1)}
         </ScoreboardStatCell>
         {scoreboardData?.problemResults[0].type !== "ioi" &&
-        <ScoreboardStatCell>
-            {scoreboardData?.penalty}
-        </ScoreboardStatCell>}
+            <ScoreboardStatCell>
+                {scoreboardData?.penalty}
+            </ScoreboardStatCell>}
 
     </TeamInfoWrapper>;
 };
