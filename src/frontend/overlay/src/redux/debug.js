@@ -24,7 +24,7 @@ export const pushLog = (text) => {
                 }
             });
         } else {
-            console.log(text);
+            //console.log(text);
         }
     };
 };
