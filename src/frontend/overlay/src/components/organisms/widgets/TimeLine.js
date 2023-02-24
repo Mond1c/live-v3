@@ -1,6 +1,7 @@
 import React from "react";
 import { TIMELINE_HEIGHT, TIMELINE_WIDTH } from "../../../config";
 import styled from "styled-components";
+import { Run } from "../../molecules/timeline/Run";
 
 const Background = styled.div`
   background-color: black;
@@ -10,26 +11,27 @@ const Background = styled.div`
   
   border-radius: 29px;
   
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  position: relative;
 `;
 
 const Line = styled.div`
   background-color: white;
   
   width: ${TIMELINE_WIDTH};
-  height: 3px;
+  height: 2%;
   
   border-radius: 5px;
+  
+  position: absolute;
+  top: 49%;
 `;
-
 
 
 export const TimeLine = () => {
     return (
         <Background>
             <Line />
+            <Run task="sdf" time="42px"/>
         </Background>
     );
 };
