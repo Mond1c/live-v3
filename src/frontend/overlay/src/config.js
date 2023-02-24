@@ -115,4 +115,9 @@ export const MEDAL_COLORS = Object.freeze({
 // Debug Behaviour
 export const LOG_LINES = 300;
 
+
+export const CIRCLE_PROBLEM_SIZE = "28px";
 export const GLOBAL_BORDER_RADIUS = "16px";
+export const CIRCLE_PROBLEM_LINE_WIDTH = "3.5px";
+
+
