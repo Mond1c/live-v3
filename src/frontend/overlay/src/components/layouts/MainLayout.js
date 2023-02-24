@@ -100,36 +100,36 @@ const WIDGETS2 = {
 };
 
 export const MainLayout = () => {
-    return (
-        <TimeLine />
-    );
-    // const widgets = useSelector(state => state.widgets.widgets);
-    // return <MainLayoutWrap>
-    //     <StatusLightbulbs compact={true}/>
-    //     <TransitionGroup component={null}>
-    //         {Object.values(widgets).map((obj) => {
-    //             //OVERLAY_VERSION ?
-    //             const Widget = (OVERLAY_VERSION === "2" ? WIDGETS2 : WIDGETS)[obj.type];
-    //             if (Widget === undefined) {
-    //                 return null;
-    //             }
-    //             const overrideLocation = OVERLAY_VERSION === "2" ? (LOCATIONS[obj.type] ?? obj.location) : obj.location;
-    //             return <Transition key={obj.widgetId} timeout={Widget.overrideTimeout ?? WIDGET_TRANSITION_TIME}>
-    //                 {state =>
-    //                     state !== "exited" && <WidgetWrap
-    //                         left={overrideLocation.positionX}
-    //                         top={overrideLocation.positionY}
-    //                         width={overrideLocation.sizeX}
-    //                         height={overrideLocation.sizeY}
-    //                         {...(!Widget.ignoreAnimation && transitionProps[state])}
-    //                     >
-    //                         <Widget widgetData={obj} transitionState={state}/>
-    //                     </WidgetWrap>
-    //                 }
-    //             </Transition>;
-    //         })}
-    //     </TransitionGroup>
-    // </MainLayoutWrap>;
+    // return (
+    //     <TimeLine />
+    // );
+    const widgets = useSelector(state => state.widgets.widgets);
+    return <MainLayoutWrap>
+        <StatusLightbulbs compact={true}/>
+        <TransitionGroup component={null}>
+            {Object.values(widgets).map((obj) => {
+                //OVERLAY_VERSION ?
+                const Widget = (OVERLAY_VERSION === "2" ? WIDGETS2 : WIDGETS)[obj.type];
+                if (Widget === undefined) {
+                    return null;
+                }
+                const overrideLocation = OVERLAY_VERSION === "2" ? (LOCATIONS[obj.type] ?? obj.location) : obj.location;
+                return <Transition key={obj.widgetId} timeout={Widget.overrideTimeout ?? WIDGET_TRANSITION_TIME}>
+                    {state =>
+                        state !== "exited" && <WidgetWrap
+                            left={overrideLocation.positionX}
+                            top={overrideLocation.positionY}
+                            width={overrideLocation.sizeX}
+                            height={overrideLocation.sizeY}
+                            {...(!Widget.ignoreAnimation && transitionProps[state])}
+                        >
+                            <Widget widgetData={obj} transitionState={state}/>
+                        </WidgetWrap>
+                    }
+                </Transition>;
+            })}
+        </TransitionGroup>
+    </MainLayoutWrap>;
 };
 
 export default MainLayout;
