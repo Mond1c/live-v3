@@ -8,8 +8,8 @@ import { StarIcon } from "./Star";
 
 const CircleCellProblemWrap = styled(Cell2)`
     position: relative;
-    width: ${CIRCLE_PROBLEM_SIZE};
-    height: ${CIRCLE_PROBLEM_SIZE};
+    width: ${props => props.radius ?? CIRCLE_PROBLEM_SIZE};
+    height: ${props => props.radius ?? CIRCLE_PROBLEM_SIZE};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,14 +19,14 @@ const CircleCellProblemWrap = styled(Cell2)`
     border: ${props => props.borderColor} ${CIRCLE_PROBLEM_LINE_WIDTH} solid;
     background: ${props => props.backgroundColor};
 `;
-export const CircleCell = ({ content, borderColor, backgroundColor }) => {
-    return <CircleCellProblemWrap borderColor={borderColor} backgroundColor={backgroundColor}>
+export const CircleCell = ({ content, borderColor, backgroundColor, radius }) => {
+    return <CircleCellProblemWrap borderColor={borderColor} backgroundColor={backgroundColor} radius={radius}>
         {content}
     </CircleCellProblemWrap>;
 };
 
-export const CircleCellProblem = ({ status, probData }) => {
-    return <CircleCell content={<div>{status === TeamTaskStatus.first && <StarIcon/>} {probData?.letter ?? "??"}</div>} borderColor={probData?.color ?? "black"} backgroundColor={TeamTaskColor[status]}/>;
+export const CircleCellProblem = ({ status, probData, radius }) => {
+    return <CircleCell content={<div>{status === TeamTaskStatus.first && <StarIcon/>} {probData?.letter ?? "??"}</div>} borderColor={probData?.color ?? "black"} backgroundColor={TeamTaskColor[status]} radius={radius}/>;
 };
 
 

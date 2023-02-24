@@ -1,17 +1,9 @@
 import React from "react";
 import { TIMELINE_CIRCLE_RADIUS } from "../../../config";
 import styled from "styled-components";
-
-
-const Circle = styled.div`
-  background-color: yellow;
-  
-  width: ${TIMELINE_CIRCLE_RADIUS};
-  height: ${TIMELINE_CIRCLE_RADIUS};
-  
-  border-radius: ${TIMELINE_CIRCLE_RADIUS};
-  
-`;
+import CircleCellProblem from "../../atoms/CircleCellsProblem";
+import { ScoreboardTimeCell, TimeCell } from "../../organisms/holder/TeamViewHolder";
+import { DateTime } from "luxon";
 
 const RunWrap = styled.div`
   display: inline-flex;
@@ -19,28 +11,18 @@ const RunWrap = styled.div`
   align-items: center;
   
   position: absolute;  
-  top: 15%;
+  top: 35%;
+  left: ${props => props.percent};
+  
 `;
 
-const Time = styled.div`
-  font-size: 15px;
-  color: white;
-
-  padding-up: ${TIMELINE_CIRCLE_RADIUS};
-  margin-up: ${TIMELINE_CIRCLE_RADIUS};
-`;
-
-const CharTask = styled.div`
-  font-weight: bold;
-  color: white;
-`;
-
-export const Run = ({ task,  time, ...props }) => {
+export const Run = ({ probData, status, lastSubmitTimeMs }) => {
+    let percent = (100 * lastSubmitTimeMs / 18000000) + "%";
+    console.log(percent);
     return (
-        <RunWrap>
-            <CharTask>A</CharTask>
-            <Circle />
-            <Time>03:42</Time>
+        <RunWrap percent={percent}>
+            <CircleCellProblem probData={probData} status={status} radius={"34px"}/>
+            <TimeCell>{DateTime.fromMillis(lastSubmitTimeMs).toFormat("H:mm")}</TimeCell>
         </RunWrap>
     );
 };
