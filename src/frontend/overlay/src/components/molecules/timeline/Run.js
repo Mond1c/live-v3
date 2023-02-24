@@ -18,7 +18,6 @@ const RunWrap = styled.div`
 
 export const Run = ({ probData, status, lastSubmitTimeMs }) => {
     let percent = (100 * lastSubmitTimeMs / 18000000) + "%";
-    console.log(percent);
     return (
         <RunWrap percent={percent}>
             <CircleCellProblem probData={probData} status={status} radius={"34px"}/>

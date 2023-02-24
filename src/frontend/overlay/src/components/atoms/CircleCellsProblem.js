@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { CIRCLE_PROBLEM_LINE_WIDTH, CIRCLE_PROBLEM_SIZE } from "icpc-live-v3/src/config";
+import { CIRCLE_CELL_FONT_SIZE, CIRCLE_PROBLEM_LINE_WIDTH, CIRCLE_PROBLEM_SIZE } from "icpc-live-v3/src/config";
 import { Cell2 } from "./Cell2";
 import { TeamTaskColor, TeamTaskStatus } from "../../utils/statusInfo";
 import { StarIcon } from "./Star";
@@ -15,7 +15,7 @@ const CircleCellProblemWrap = styled(Cell2)`
     align-items: center;
     padding: 0;
     border-radius: 50%;
-    font-size: 14px;
+    font-size: ${CIRCLE_CELL_FONT_SIZE};
     border: ${props => props.borderColor} ${CIRCLE_PROBLEM_LINE_WIDTH} solid;
     background: ${props => props.backgroundColor};
 `;

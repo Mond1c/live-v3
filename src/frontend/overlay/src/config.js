@@ -72,7 +72,7 @@ export const STATISTICS_STATS_VALUE_COLOR = "#FFFFFF";
 
 
 export const CELL_FONT_FAMILY = GLOBAL_DEFAULT_FONT_FAMILY;
-export const CELL_FONT_SIZE = "18pt";
+export const CELL_FONT_SIZE = "14pt";
 export const CELL_TEXT_COLOR = "#FFFFFF";
 export const CELL_BG_COLOR = "#000000";
 export const CELL_BG_COLOR_ODD = "rgba(1, 1, 1, 0.9)";
@@ -105,6 +105,7 @@ export const TIMELINE_HEIGHT = "109px"; // css property
 
 export const TIMELINE_CIRCLE_RADIUS = "39px"; // css property
 
+export const CIRCLE_CELL_FONT_SIZE = "20px";
 
 export const TEAMVIEW_SMALL_FACTOR = "50%"; // css property
 
