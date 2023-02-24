@@ -16,7 +16,7 @@ const CircleCellProblemWrap = styled(Cell2)`
     padding: 0;
     border-radius: 50%;
     font-size: ${CIRCLE_CELL_FONT_SIZE};
-    border: ${props => props.borderColor} ${CIRCLE_PROBLEM_LINE_WIDTH} solid;
+    border: ${props => props.borderColor ? `${props.borderColor} ${CIRCLE_PROBLEM_LINE_WIDTH} solid` : 0};
     background: ${props => props.backgroundColor};
 `;
 export const CircleCell = ({ content, borderColor, backgroundColor, radius }) => {

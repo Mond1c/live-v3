@@ -22,6 +22,7 @@ import {
 import { formatScore } from "../../atoms/ContestCells";
 import { TextShrinking } from "../../atoms/Cell2";
 import { DataRow } from "../../atoms/DataRow";
+import { CircleCell } from "../../atoms/CircleCellsProblem";
 
 
 export const QueueRow2 = ({ entryData, isEven, flash }) => {
@@ -36,7 +37,7 @@ export const QueueRow2 = ({ entryData, isEven, flash }) => {
             canShrink={false}
             canGrow={false}
             text={scoreboardData === null ? "??" : formatScore(scoreboardData?.totalScore ?? 0.0, 1)}/>
-        <ProblemCell2 probData={probData} width={CELL_QUEUE_TASK_WIDTH}/>
+        <CircleCell content={probData?.letter ?? "??"} backgroundColor={probData?.color ?? "black"} probData={probData} width={CELL_QUEUE_TASK_WIDTH}/>
         <VerdictCell2 runData={entryData} width={CELL_QUEUE_VERDICT_WIDTH}/>
     </DataRow>;
 };
