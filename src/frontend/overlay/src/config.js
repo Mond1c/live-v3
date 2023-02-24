@@ -99,6 +99,13 @@ export const TICKER_CLOCK_MARGIN_LEFT = "10px"; // css property
 export const TICKER_SCOREBOARD_RANK_WIDTH = "50px"; // css property
 
 
+export const TIMELINE_WIDTH = "100%"; // css property
+
+export const TIMELINE_HEIGHT = "109px"; // css property
+
+export const TIMELINE_CIRCLE_RADIUS = "39px"; // css property
+
+
 export const TEAMVIEW_SMALL_FACTOR = "50%"; // css property
 
 
