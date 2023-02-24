@@ -76,7 +76,7 @@ const TeamTaskSymbol = Object.freeze({
     [TeamTaskStatus.first]: "+",
 });
 
-const ScoreboardTaskCell = ({ status, attempts }) => {
+export const ScoreboardTaskCell = ({ status, attempts }) => {
     return <ScoreboardTaskCellWrap background={TeamTaskColor[status]}>
         {status === TeamTaskStatus.first && <StarIcon/>}
         {TeamTaskSymbol[status]}

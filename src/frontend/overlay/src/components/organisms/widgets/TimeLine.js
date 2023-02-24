@@ -48,7 +48,8 @@ export const TimeLine = ({ scoreboardData }) => {
                 getStatus(isFirstToSolve, isSolved, pendingAttempts, wrongAttempts) === TeamTaskStatus.untouched ? null :
                     <Run probData={tasks[index]}
                         status={getStatus(isFirstToSolve, isSolved, pendingAttempts, wrongAttempts)}
-                        lastSubmitTimeMs={lastSubmitTimeMs}/>
+                        lastSubmitTimeMs={lastSubmitTimeMs}
+                        resultAttempts={wrongAttempts + pendingAttempts}/>
             )}
         </Background>
     );
