@@ -16,7 +16,7 @@ const RunWrap = styled.div`
   align-items: center;
 
   position: absolute;
-  top: 5%;
+  top: 3%;
   left: ${props => props.percent};
 `;
 

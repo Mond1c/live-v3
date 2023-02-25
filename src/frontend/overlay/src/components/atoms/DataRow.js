@@ -17,11 +17,7 @@ export const DataRowWrap = styled.div`
 `;
 
 export const DataRow = ({ medal, ...props }) => {
-
-
-    console.log(medal);
     if (MEDAL_COLORS[medal]) {
-        console.log("kek");
         props.background = `linear-gradient(270deg, rgba(253, 141, 105, 0) 0, ${MEDAL_COLORS[medal]} 100%)` + CELL_BG_COLOR_ODD;
     } else {
         props.background = props.background ?? ((props.isEven && CELL_BG_COLOR_ODD) || CELL_BG_COLOR);
