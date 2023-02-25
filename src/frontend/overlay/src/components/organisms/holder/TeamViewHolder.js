@@ -20,6 +20,7 @@ import { formatScore } from "../../atoms/ContestCells";
 import { ScoreboardIOITaskCell } from "../widgets/Scoreboard";
 import { Cell2 } from "../../atoms/Cell2";
 import { TimeLine } from "../widgets/TimeLine";
+import { StarIcon2 } from "../../atoms/Star2";
 
 const NUMWIDTH = 80;
 const NAMEWIDTH = 300;
@@ -51,6 +52,25 @@ const ScoreboardTaskCellWrap = styled(ScoreboardCell)`
   height: 100%;
   padding: 5px;
   min-width: 40px;
+`;
+
+const ScoreboardCell2 = styled(Cell2)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  position: relative;
+`;
+
+const ScoreboardTaskCellWrap2 = styled(ScoreboardCell2)`
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 100%;
+  height: 100%;
+  padding: 5px;
+  min-width: 40px;
+  border-radius: 15px;
+  color: ${(props) => props.color ?? "white"};
 `;
 
 const TeamTaskStatus = Object.freeze({
@@ -85,6 +105,13 @@ export const ScoreboardTaskCell = ({ status, attempts }) => {
     </ScoreboardTaskCellWrap>;
 };
 
+export const ScoreboardTaskCell2 = ({ status, attempts }) => {
+    return <ScoreboardTaskCellWrap2 color ={TeamTaskColor[status]}>
+        {status === TeamTaskStatus.first}
+        {TeamTaskSymbol[status]}
+        {status !== TeamTaskStatus.untouched && attempts > 0 && attempts}
+    </ScoreboardTaskCellWrap2>;
+};
 const StatisticsProblemCell = styled(ProblemCell)`
   padding: 0 10px;
   width: 50px;
@@ -156,48 +183,48 @@ const ScoreboardColumn = ({ teamId, isSmall }) => {
     const tasks = useSelector(state => state.contestInfo?.info?.problems);
     const contestData = useSelector((state) => state.contestInfo.info);
 
-    // return <TimeLine scoreboardData={scoreboardData}/>;
-    if (scoreboardData?.problemResults[0].type === "icpc") {
-        return <ScoreboardColumnWrapper isSmall={isSmall}>
-            <ScoreboardTeamInfoRow>
-                <TeamInfo teamId={teamId}/>
-            </ScoreboardTeamInfoRow>
-            {_.sortBy(scoreboardData?.problemResults, "lastSubmitTimeMs").flatMap(({
-                wrongAttempts,
-                pendingAttempts,
-                isSolved,
-                isFirstToSolve,
-                lastSubmitTimeMs,
-                index
-            }, i) =>
-                getStatus(isFirstToSolve, isSolved, pendingAttempts, wrongAttempts) === TeamTaskStatus.untouched ? null :
-                    <TaskRow key={i}>
-                        <ScoreboardTimeCell>{DateTime.fromMillis(lastSubmitTimeMs).toFormat("H:mm")}</ScoreboardTimeCell>
-                        <StatisticsProblemCell probData={tasks[index]}/>
-                        <ScoreboardTaskCell status={getStatus(isFirstToSolve, isSolved, pendingAttempts, wrongAttempts)}
-                            attempts={wrongAttempts + pendingAttempts}/>
-                    </TaskRow>
-            )}
-        </ScoreboardColumnWrapper>;
-    } else {
-        return <ScoreboardColumnWrapper isSmall={isSmall}>
-            <ScoreboardTeamInfoRow>
-                <TeamInfo teamId={teamId}/>
-            </ScoreboardTeamInfoRow>
-            {_.sortBy(scoreboardData?.problemResults, "lastSubmitTimeMs").flatMap(({
-                score,
-                lastSubmitTimeMs,
-                index
-            }, i) =>
-                (score === undefined || lastSubmitTimeMs === undefined) ? null :
-                    <TaskRow key={i}>
-                        <ScoreboardTimeCell>{DateTime.fromMillis(lastSubmitTimeMs).toFormat("H:mm")}</ScoreboardTimeCell>
-                        <StatisticsProblemCell probData={tasks[index]}/>
-                        <ScoreboardIOITaskCell width={CELL_QUEUE_VERDICT_WIDTH} score={score}  minScore={contestData?.problems[index]?.minScore} maxScore={contestData?.problems[index]?.maxScore}/>
-                    </TaskRow>
-            )}
-        </ScoreboardColumnWrapper>;
-    }
+    return <TimeLine scoreboardData={scoreboardData}/>;
+    // if (scoreboardData?.problemResults[0].type === "icpc") {
+    //     return <ScoreboardColumnWrapper isSmall={isSmall}>
+    //         <ScoreboardTeamInfoRow>
+    //             <TeamInfo teamId={teamId}/>
+    //         </ScoreboardTeamInfoRow>
+    //         {_.sortBy(scoreboardData?.problemResults, "lastSubmitTimeMs").flatMap(({
+    //             wrongAttempts,
+    //             pendingAttempts,
+    //             isSolved,
+    //             isFirstToSolve,
+    //             lastSubmitTimeMs,
+    //             index
+    //         }, i) =>
+    //             getStatus(isFirstToSolve, isSolved, pendingAttempts, wrongAttempts) === TeamTaskStatus.untouched ? null :
+    //                 <TaskRow key={i}>
+    //                     <ScoreboardTimeCell>{DateTime.fromMillis(lastSubmitTimeMs).toFormat("H:mm")}</ScoreboardTimeCell>
+    //                     <StatisticsProblemCell probData={tasks[index]}/>
+    //                     <ScoreboardTaskCell status={getStatus(isFirstToSolve, isSolved, pendingAttempts, wrongAttempts)}
+    //                         attempts={wrongAttempts + pendingAttempts}/>
+    //                 </TaskRow>
+    //         )}
+    //     </ScoreboardColumnWrapper>;
+    // } else {
+    //     return <ScoreboardColumnWrapper isSmall={isSmall}>
+    //         <ScoreboardTeamInfoRow>
+    //             <TeamInfo teamId={teamId}/>
+    //         </ScoreboardTeamInfoRow>
+    //         {_.sortBy(scoreboardData?.problemResults, "lastSubmitTimeMs").flatMap(({
+    //             score,
+    //             lastSubmitTimeMs,
+    //             index
+    //         }, i) =>
+    //             (score === undefined || lastSubmitTimeMs === undefined) ? null :
+    //                 <TaskRow key={i}>
+    //                     <ScoreboardTimeCell>{DateTime.fromMillis(lastSubmitTimeMs).toFormat("H:mm")}</ScoreboardTimeCell>
+    //                     <StatisticsProblemCell probData={tasks[index]}/>
+    //                     <ScoreboardIOITaskCell width={CELL_QUEUE_VERDICT_WIDTH} score={score}  minScore={contestData?.problems[index]?.minScore} maxScore={contestData?.problems[index]?.maxScore}/>
+    //                 </TaskRow>
+    //         )}
+    //     </ScoreboardColumnWrapper>;
+    // }
 };
 
 export const TeamInfo = ({ teamId }) => {

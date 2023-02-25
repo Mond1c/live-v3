@@ -110,7 +110,7 @@ export const CIRCLE_CELL_FONT_SIZE = "20px";
 export const TEAMVIEW_SMALL_FACTOR = "50%"; // css property
 
 
-export const STAR_SIZE = 20; // px
+export const STAR_SIZE = 14; // px
 
 
 // Medals

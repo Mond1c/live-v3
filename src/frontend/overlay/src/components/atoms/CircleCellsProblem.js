@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { CIRCLE_CELL_FONT_SIZE, CIRCLE_PROBLEM_LINE_WIDTH, CIRCLE_PROBLEM_SIZE } from "icpc-live-v3/src/config";
 import { Cell2 } from "./Cell2";
 import { TeamTaskColor, TeamTaskStatus } from "../../utils/statusInfo";
-import { StarIcon } from "./Star";
+import { StarIcon2 } from "./Star2";
 
 
 const CircleCellProblemWrap = styled(Cell2)`
@@ -26,7 +26,7 @@ export const CircleCell = ({ content, borderColor, backgroundColor, radius }) =>
 };
 
 export const CircleCellProblem = ({ status, probData, radius }) => {
-    return <CircleCell content={<div>{status === TeamTaskStatus.first && <StarIcon/>} {probData?.letter ?? "??"}</div>} borderColor={probData?.color ?? "black"} backgroundColor={TeamTaskColor[status]} radius={radius}/>;
+    return <CircleCell content={<div>{status === TeamTaskStatus.first && <StarIcon2/>} {probData?.letter ?? "??"}</div>} borderColor={probData?.color ?? "black"} backgroundColor={TeamTaskColor[status]} radius={radius}/>;
 };
 
 

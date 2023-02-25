@@ -75,7 +75,6 @@ const VerdictCellProgressBar2 = styled.div.attrs(({ width }) => ({
   height: 13px;
   border-radius: 16px;
   
-  
   background-color: ${VERDICT_UNKNOWN};
 `;
 
@@ -141,9 +140,10 @@ const VerdictCellInProgressWrap = styled(Cell)`
 
 const VerdictCellInProgressWrap2 = styled(Cell2)`
   position: relative;
+  left: 6px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-content: center;
 `;
 
