@@ -73,7 +73,8 @@ const VerdictCellProgressBar2 = styled.div.attrs(({ width }) => ({
     }
 }))`
   height: 13px;
-  border-radius: 16px;
+  border-bottom-left-radius: 16px;
+  border-top-left-radius: 16px;
   
   background-color: ${VERDICT_UNKNOWN};
 `;
@@ -159,7 +160,7 @@ VerdictCellInProgress.PropTypes = {
 
 const VerdictCellInProgress2 = ({ percentage, ...props }) => {
     return <VerdictCellInProgressWrap2 {...props} >
-        {percentage !== 0 && <VerdictCellProgressBar2 width={percentage * 100 * 0.8 + "%"}/>}
+        {percentage !== 0 && <VerdictCellProgressBar2 width={percentage * 100 * 0.6 + "%"}/>}
     </VerdictCellInProgressWrap2>;
 };
 
@@ -290,7 +291,7 @@ RankCell.propTypes = {
 
 
 export const QueueStatusCell = ({ data, score, ...props }) => {
-    return data.type === "icpc" ? <ICPCScoreCell score={score} color={TeamTaskColor[data.isAccepted ? VERDICT_OK : VERDICT_NOK]} {...props}/> :
+    return data.type === "icpc" ? <ICPCScoreCell score={score} color={data.isAccepted ? VERDICT_OK : VERDICT_NOK} {...props}/> :
         <ICPCScoreCell score={data.difference > 0 ? `+${formatScore(data.difference, 1)}` : (data.difference < 0 ? `-${formatScore(-data.difference, 1)}` : "=")} color={data.difference > 0 ? VERDICT_OK : (data.difference < 0 ? VERDICT_NOK : VERDICT_UNKNOWN)} {...props}/>;
 };
 
