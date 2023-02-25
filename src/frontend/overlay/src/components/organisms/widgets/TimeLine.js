@@ -6,6 +6,7 @@ import _ from "lodash";
 import { getStatus, ScoreboardTimeCell } from "../holder/TeamViewHolder";
 import { useSelector } from "react-redux";
 import { TeamTaskStatus } from "../../../utils/statusInfo";
+import { DateTime } from "luxon";
 
 const Background = styled.div`
   background-color: black;
@@ -46,25 +47,10 @@ const LineBackground = styled.div`
 export const TimeLine = ({ scoreboardData }) => {
     const tasks = useSelector(state => state.contestInfo?.info?.problems);
     const contestData = useSelector((state) => state.contestInfo.info);
-    // I know that it's bad, but now We have gradient!
-    // It may be do more well
-    let array = _.sortBy(scoreboardData?.problemResults, "lastSubmitTimeMs").flatMap(({
-        wrongAttempts,
-        pendingAttempts,
-        isSolved,
-        isFirstToSolve,
-        lastSubmitTimeMs,
-        index }, i) => {
-        return lastSubmitTimeMs;
-    }
-    );
-    let lastSubmitTime;
-    for (const elem in array) {
-        if (array[elem] !== undefined) {
-            lastSubmitTime = array[elem];
-        }
-    }
-    let procentOfLine = (100 * 0.96 * lastSubmitTime / 18000000) + "%"; // I point on 0.96 because in another case, gradient will be further than circle
+    const contestInfo = useSelector((state) => state.contestInfo.info);
+    const milliseconds = DateTime.fromMillis(contestInfo.startTimeUnixMs).diffNow().negate().milliseconds *
+        (contestInfo.emulationSpeed ?? 1);
+    let procentOfLine = (100 * 0.96 * milliseconds / 18000000) + "%"; // I point on 0.96 because in another case, gradient will be further than circle
     return (
         <Background>
             <LineBackground>
@@ -77,7 +63,6 @@ export const TimeLine = ({ scoreboardData }) => {
                 isFirstToSolve,
                 lastSubmitTimeMs,
                 index }, i) => {
-                lastSubmitTime = lastSubmitTimeMs;
                 return getStatus(isFirstToSolve, isSolved, pendingAttempts, wrongAttempts) === TeamTaskStatus.untouched ? null :
                     <Run probData={tasks[index]}
                         status={getStatus(isFirstToSolve, isSolved, pendingAttempts, wrongAttempts)}
