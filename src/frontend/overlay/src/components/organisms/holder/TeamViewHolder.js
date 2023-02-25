@@ -19,6 +19,7 @@ import { StarIcon } from "../../atoms/Star";
 import { formatScore } from "../../atoms/ContestCells";
 import { ScoreboardIOITaskCell } from "../widgets/Scoreboard";
 import { Cell2 } from "../../atoms/Cell2";
+import { TimeLine } from "../widgets/TimeLine";
 
 const NUMWIDTH = 80;
 const NAMEWIDTH = 300;
@@ -155,6 +156,7 @@ const ScoreboardColumn = ({ teamId, isSmall }) => {
     const tasks = useSelector(state => state.contestInfo?.info?.problems);
     const contestData = useSelector((state) => state.contestInfo.info);
 
+    // return <TimeLine scoreboardData={scoreboardData}/>;
     if (scoreboardData?.problemResults[0].type === "icpc") {
         return <ScoreboardColumnWrapper isSmall={isSmall}>
             <ScoreboardTeamInfoRow>

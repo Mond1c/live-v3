@@ -100,9 +100,6 @@ const WIDGETS2 = {
 };
 
 export const MainLayout = () => {
-    // return (
-    //     <TimeLine />
-    // );
     const widgets = useSelector(state => state.widgets.widgets);
     return <MainLayoutWrap>
         <StatusLightbulbs compact={true}/>
