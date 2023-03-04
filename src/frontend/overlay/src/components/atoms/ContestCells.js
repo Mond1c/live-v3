@@ -14,7 +14,7 @@ import {
 } from "../../config";
 import { Cell } from "./Cell";
 import { StarIcon } from "./Star";
-import { Cell2, TextShrinking } from "./Cell2";
+import { Box2, FlexedBox2, TextShrinking } from "./Box2";
 import { getTeamTaskColor, TeamTaskColor, TeamTaskStatus } from "../../utils/statusInfo";
 
 export const formatScore = (score, digits = 2) => {
@@ -30,7 +30,7 @@ export const ProblemCellWrap = styled(Cell)`
   border-bottom: ${props => props.probColor} ${CELL_PROBLEM_LINE_WIDTH} solid;
 `;
 
-export const ProblemCellWrap2 = styled(Cell2)`
+export const ProblemCellWrap2 = styled(Box2)`
   background-color: ${props => props.probColor};
   border-radius: 100%;
 `;
@@ -67,18 +67,6 @@ const VerdictCellProgressBar = styled.div.attrs(({ width }) => ({
   background-color: ${VERDICT_UNKNOWN};
 `;
 
-const VerdictCellProgressBar2 = styled.div.attrs(({ width }) => ({
-    style: {
-        width
-    }
-}))`
-  height: 13px;
-  border-bottom-left-radius: 16px;
-  border-top-left-radius: 16px;
-  
-  background-color: ${VERDICT_UNKNOWN};
-`;
-
 const VerdictCellICPC = ({ verdict, ...props }) => {
     return <TextShrinkingCell
         background={verdict.isAccepted ? VERDICT_OK : VERDICT_NOK}
@@ -92,7 +80,7 @@ const VerdictCellICPC = ({ verdict, ...props }) => {
     </TextShrinkingCell>;
 };
 
-const ICPCVerdict = PropTypes.shape({
+export const ICPCVerdict = PropTypes.shape({
     type: PropTypes.string.isRequired,
     isFirstToSolveRun: PropTypes.bool.isRequired,
     isAccepted: PropTypes.bool.isRequired,
@@ -124,7 +112,7 @@ const VerdictCellIOI = ({ verdict, ...props }) => {
     }
 };
 
-const IOIVerdict = PropTypes.shape({
+export const IOIVerdict = PropTypes.shape({
     type: PropTypes.string.isRequired,
     score: PropTypes.number.isRequired,
     difference: PropTypes.number.isRequired,
@@ -139,15 +127,6 @@ const VerdictCellInProgressWrap = styled(Cell)`
   position: relative;
 `;
 
-const VerdictCellInProgressWrap2 = styled(Cell2)`
-  position: relative;
-  left: 6px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-content: center;
-`;
-
 const VerdictCellInProgress = ({ percentage, ...props }) => {
     return <VerdictCellInProgressWrap {...props} >
         {percentage !== 0 && <VerdictCellProgressBar width={percentage * 100 + "%"}/>}
@@ -155,16 +134,6 @@ const VerdictCellInProgress = ({ percentage, ...props }) => {
 };
 
 VerdictCellInProgress.PropTypes = {
-    percentage: PropTypes.number.isRequired
-};
-
-const VerdictCellInProgress2 = ({ percentage, ...props }) => {
-    return <VerdictCellInProgressWrap2 {...props} >
-        {percentage !== 0 && <VerdictCellProgressBar2 width={percentage * 100 * 0.6 + "%"}/>}
-    </VerdictCellInProgressWrap2>;
-};
-
-VerdictCellInProgress2.PropTypes = {
     percentage: PropTypes.number.isRequired
 };
 
@@ -183,23 +152,6 @@ export const VerdictCell = ({
 };
 
 VerdictCell.propTypes = {
-    ...Cell.propTypes,
-    runData: PropTypes.shape({
-        result: PropTypes.oneOf([IOIVerdict, ICPCVerdict]),
-        percentage: PropTypes.number.isRequired
-    })
-};
-export const VerdictCell2 = ({
-    runData: data,
-    ...props
-}) => {
-    if (data.result === undefined) {
-        return <VerdictCellInProgress2 percentage={data.percentage} {...props}/>;
-    }
-    return <QueueStatusCell data={data.result} score={data.result.result} {...props}/>;
-};
-
-VerdictCell2.propTypes = {
     ...Cell.propTypes,
     runData: PropTypes.shape({
         result: PropTypes.oneOf([IOIVerdict, ICPCVerdict]),
@@ -284,47 +236,6 @@ export const RankCell = ({ rank, medal, ...props }) => {
 };
 
 RankCell.propTypes = {
-    ...Cell.propTypes,
-    rank: PropTypes.number
-};
-
-
-
-export const QueueStatusCell = ({ data, score, ...props }) => {
-    return data.type === "icpc" ? <ICPCScoreCell score={score} color={data.isAccepted ? VERDICT_OK : VERDICT_NOK} {...props}/> :
-        <ICPCScoreCell score={data.difference > 0 ? `+${formatScore(data.difference, 1)}` : (data.difference < 0 ? `-${formatScore(-data.difference, 1)}` : "=")} color={data.difference > 0 ? VERDICT_OK : (data.difference < 0 ? VERDICT_NOK : VERDICT_UNKNOWN)} {...props}/>;
-};
-
-export const StatusCell = ({ data, score, ...props }) => {
-    return data.type === "icpc" ? <ICPCScoreCell score={score} color={TeamTaskColor[data.isAccepted ? VERDICT_OK : VERDICT_NOK]} {...props}/> :
-        <IOIScoreCell score={score} maxScore={props.maxScore} minScore={props.minScore}/>;
-};
-
-const ScoreCell = styled(Cell2)`
-  position: relative;
-`;
-
-
-
-export const ICPCScoreCell = ({ score, color, background, ...props }) => {
-
-    return <ScoreCell {...props}><TextShrinking canGrow={false} canShrink={false} text={ score ?? "??" } color={ color ?? CELL_TEXT_COLOR } background={background}/></ScoreCell>;
-};
-
-
-export const IOIScoreCell = ({ score, minScore, maxScore, ...props }) => {
-    return <ScoreCell {...props}><TextShrinking canGrow={false} canShrink={false} text={ score ?? "??" } color={ getTeamTaskColor(score, props.minScore, props.maxScore) ?? CELL_TEXT_COLOR }
-        background={getTeamTaskColor(score, props.minScore, props.maxScore)}/></ScoreCell>;
-};
-
-
-export const RankCell2 = ({ rank, medal, ...props }) => {
-    return <Cell2 background={MEDAL_COLORS[medal]} {...props}>
-        {rank ?? "??"}
-    </Cell2>;
-};
-
-RankCell2.propTypes = {
     ...Cell.propTypes,
     rank: PropTypes.number
 };

@@ -155,7 +155,7 @@ export const Queue2 = ({ widgetData }) => {
                         featured={featured}
                         featuredRunHeight={featuredRunHeight}
                     />
-                    <QueueRow2 entryData={queueEntry} isEven={isEven} flash={featured && !featuredRunLoaded}/>
+                    <QueueRow2 runInfo={queueEntry} isEven={isEven} flash={featured && !featuredRunLoaded}/>
                 </QueueRowWrap>;
             }}
         </Transition>;

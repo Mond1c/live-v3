@@ -18,7 +18,7 @@ import { ProblemCell, RankCell, TextShrinkingCell } from "../../atoms/ContestCel
 import { StarIcon } from "../../atoms/Star";
 import { formatScore } from "../../atoms/ContestCells";
 import { ScoreboardIOITaskCell } from "../widgets/Scoreboard";
-import { Cell2 } from "../../atoms/Cell2";
+import { Box2 } from "../../atoms/Box2";
 import { TimeLine } from "../widgets/TimeLine";
 import { StarIcon2 } from "../../atoms/Star2";
 
@@ -54,7 +54,7 @@ const ScoreboardTaskCellWrap = styled(ScoreboardCell)`
   min-width: 40px;
 `;
 
-const ScoreboardCell2 = styled(Cell2)`
+const ScoreboardCell2 = styled(Box2)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -128,7 +128,7 @@ export const ScoreboardTimeCell = styled(ScoreboardCell)`
   min-width: 40px;
 `;
 
-export const TimeCell = styled(Cell2)`
+export const TimeCell = styled(Box2)`
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 100%;

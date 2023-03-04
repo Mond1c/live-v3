@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { CIRCLE_CELL_FONT_SIZE, CIRCLE_PROBLEM_LINE_WIDTH, CIRCLE_PROBLEM_SIZE } from "icpc-live-v3/src/config";
-import { Cell2 } from "./Cell2";
+import { Box2, FlexedBox2 } from "./Box2";
 import { TeamTaskColor, TeamTaskStatus } from "../../utils/statusInfo";
 import { StarIcon2 } from "./Star2";
 
 
-const CircleCellProblemWrap = styled(Cell2)`
+const CircleCellProblemWrap = styled(FlexedBox2)`
     position: relative;
     width: ${props => props.radius ?? CIRCLE_PROBLEM_SIZE};
     height: ${props => props.radius ?? CIRCLE_PROBLEM_SIZE};

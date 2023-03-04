@@ -42,7 +42,6 @@ export const VERDICT_OK = "#1b8041";
 export const VERDICT_NOK = "#881f1b";
 export const VERDICT_UNKNOWN = "#a59e0c";
 
-
 export const QUEUE_ROW_HEIGHT = 32; // px
 export const QUEUE_FTS_PADDING = QUEUE_ROW_HEIGHT / 2; // px
 export const QUEUE_OPACITY = 0.95;
@@ -123,7 +122,8 @@ export const MEDAL_COLORS = Object.freeze({
 // Debug Behaviour
 export const LOG_LINES = 300;
 
-
+export const QUEUE_PER_COLUMNS_PADDING2 = "4px"; // css property
+export const QUEUE_VERDICT_PADDING_LEFT2 = "10px"; // css property
 export const CIRCLE_PROBLEM_SIZE = "28px";
 export const GLOBAL_BORDER_RADIUS = "16px";
 export const CIRCLE_PROBLEM_LINE_WIDTH = "3.5px";
