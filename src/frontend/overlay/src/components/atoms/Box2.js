@@ -18,12 +18,13 @@ export const Box2 = styled.div`
   
   font-family: ${GLOBAL_DEFAULT_FONT_FAMILY};
   font-size: ${GLOBAL_DEFAULT_FONT_SIZE};
-  color: ${CELL_TEXT_COLOR};
+  font-weight: ${({ fontWeight }) => fontWeight};
+  color: ${({ color }) => color ?? CELL_TEXT_COLOR};
   text-align: ${({ align }) => align};
   box-sizing: border-box; /*why we use it?*/
 
     //line-height: ${props => props.height ?? "100%"};
-  //display: inline-flex;
+  display: ${({ display }) => display};
     // flex-shrink: ${props => (props.canShrink ?? false) ? 1 : 0};
     // flex-grow: ${props => (props.canGrow ?? false) ? 1 : 0};
     //flex-basis: ${props => props.basis};
@@ -46,15 +47,15 @@ Box2.propTypes = {
 export const FlexedBox2 = styled(Box2)`
   flex-grow: ${({ flexGrow }) => flexGrow ?? 0};
   flex-shrink: ${({ flexShrink }) => flexShrink ?? 0};
+  flex-basis: ${({ flexBasis }) => flexBasis};
   align-items: center;
-  justify-content: center;
+  justify-content: ${({ justifyContent }) => justifyContent ?? "center"};
   flex-basis: ${props => props.basis};
 `;
 
 export const ShrinkingBox2 = ({ text, children, font = GLOBAL_DEFAULT_FONT, align = "left", color, Wrapper = Box2, ...props }) => {
-    console.log(props);
-    if (text.length > 10) {
-        text += " 12345678";
+    if (text.length > 10) { // TODO: delete
+        // text += " 12345678";
     }
     const boxRef = useRef(null);
     const updateScale = useCallback((newCellRef) => {

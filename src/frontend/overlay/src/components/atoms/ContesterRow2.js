@@ -1,6 +1,13 @@
 import styled from "styled-components";
 import React from "react";
-import { CELL_BG_COLOR, CELL_BG_COLOR_ODD, MEDAL_COLORS, QUEUE_OPACITY, QUEUE_ROW_HEIGHT } from "../../config";
+import {
+    CELL_BG_COLOR,
+    CELL_BG_COLOR_ODD,
+    CONTESTER_ROW_OPACITY,
+    MEDAL_COLORS,
+    QUEUE_OPACITY,
+    QUEUE_ROW_HEIGHT
+} from "../../config";
 import PropTypes from "prop-types";
 
 const getContesterRowBackground = (background, medal, isEven) => {
@@ -21,7 +28,7 @@ export const ContesterRow2 = styled.div`
   display: flex;
   flex-wrap: nowrap;
   max-width: 100%; // why?
-  opacity: ${QUEUE_OPACITY};
+  opacity: ${CONTESTER_ROW_OPACITY};
   
   padding: 0 10px;
 `;

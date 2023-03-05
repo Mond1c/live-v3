@@ -1,5 +1,5 @@
 import React from "react";
-import { TIMELINE_HEIGHT, TIMELINE_WIDTH } from "../../../config";
+import { CONTESTER_ROW_OPACITY, TIMELINE_HEIGHT, TIMELINE_WIDTH } from "../../../config";
 import styled from "styled-components";
 import { Run } from "../../molecules/timeline/Run";
 import _ from "lodash";
@@ -10,13 +10,15 @@ import { DateTime } from "luxon";
 
 const Background = styled.div`
   background-color: black;
+  opacity: ${CONTESTER_ROW_OPACITY};
 
   width: ${TIMELINE_WIDTH};
   height: ${TIMELINE_HEIGHT};
 
   border-radius: 29px;
 
-  position: relative;
+  position: absolute;
+  bottom: 0;
 `;
 
 const Line = styled.div`
@@ -46,10 +48,9 @@ const LineBackground = styled.div`
 // scoreboardData you may get from TeamViewHolder.js 152 str
 export const TimeLine = ({ scoreboardData }) => {
     const tasks = useSelector(state => state.contestInfo?.info?.problems);
-    const contestData = useSelector((state) => state.contestInfo.info);
-    const contestInfo = useSelector((state) => state.contestInfo.info);
-    const milliseconds = DateTime.fromMillis(contestInfo.startTimeUnixMs).diffNow().negate().milliseconds *
-        (contestInfo.emulationSpeed ?? 1);
+    const contestInfo = useSelector((state) => state.contestInfo?.info);
+    const milliseconds = DateTime.fromMillis(contestInfo?.startTimeUnixMs ?? 0).diffNow().negate().milliseconds *
+        (contestInfo?.emulationSpeed ?? 1);
     let procentOfLine = (100 * 0.96 * milliseconds / 18000000) + "%"; // I point on 0.96 because in another case, gradient will be further than circle
     return (
         <Background>

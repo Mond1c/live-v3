@@ -21,6 +21,7 @@ import { LOCATIONS } from "icpc-live-v3/src/locations";
 import { OVERLAY_VERSION } from "icpc-live-v3/src/config";
 import { Queue2 } from "../organisms/widgets/Queue2";
 import { TimeLine } from "../organisms/widgets/TimeLine";
+import Scoreboard2 from "../organisms/widgets/Scoreboard2";
 
 const fadeIn = keyframes`
   from {
@@ -87,7 +88,7 @@ const WIDGETS = {
 
 const WIDGETS2 = {
     AdvertisementWidget: Advertisement,
-    ScoreboardWidget: Scoreboard,
+    ScoreboardWidget: Scoreboard2,
     QueueWidget: Queue2,
     PictureWidget: Pictures,
     SvgWidget: Svg,
@@ -120,7 +121,7 @@ export const MainLayout = () => {
                             height={overrideLocation.sizeY}
                             {...(!Widget.ignoreAnimation && transitionProps[state])}
                         >
-                            <Widget widgetData={obj} transitionState={state}/>
+                            <Widget widgetData={{ ...obj, location: overrideLocation }} transitionState={state}/>
                         </WidgetWrap>
                     }
                 </Transition>;

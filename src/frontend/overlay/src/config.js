@@ -41,14 +41,20 @@ export const GLOBAL_DEFAULT_FONT = GLOBAL_DEFAULT_FONT_SIZE + " " + GLOBAL_DEFAU
 export const VERDICT_OK = "#1b8041";
 export const VERDICT_NOK = "#881f1b";
 export const VERDICT_UNKNOWN = "#a59e0c";
+export const VERDICT_OK2 = "#2ecb68";
+export const VERDICT_NOK2 = "#cb2e28";
+export const VERDICT_UNKNOWN2 = "#e5da1c";
 
 export const QUEUE_ROW_HEIGHT = 32; // px
+export const QUEUE_ROW_HEIGHT_WITH_PADDING = 36; // px
 export const QUEUE_FTS_PADDING = QUEUE_ROW_HEIGHT / 2; // px
 export const QUEUE_OPACITY = 0.95;
 export const QUEUE_FEATURED_RUN_ASPECT = 16 / 9;
 
 export const SCOREBOARD_RANK_WIDTH = "80px"; // px
+export const SCOREBOARD_RANK_WIDTH2 = "50px"; // px
 export const SCOREBOARD_NAME_WIDTH = "300px"; // px
+export const SCOREBOARD_NAME_WIDTH2 = "350px"; // px
 export const SCOREBOARD_SUM_PEN_WIDTH = "80px"; // px
 export const SCOREBOARD_HEADER_TITLE_BG_COLOR = VERDICT_NOK;
 export const SCOREBOARD_HEADER_TITLE_BG_GREEN_COLOR = VERDICT_OK;
@@ -122,7 +128,8 @@ export const MEDAL_COLORS = Object.freeze({
 // Debug Behaviour
 export const LOG_LINES = 300;
 
-export const QUEUE_PER_COLUMNS_PADDING2 = "4px"; // css property
+export const CONTESTER_ROW_OPACITY = 1;
+export const QUEUE_PER_COLUMNS_PADDING2 = "5px"; // css property
 export const QUEUE_VERDICT_PADDING_LEFT2 = "10px"; // css property
 export const CIRCLE_PROBLEM_SIZE = "28px";
 export const GLOBAL_BORDER_RADIUS = "16px";

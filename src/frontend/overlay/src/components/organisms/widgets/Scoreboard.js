@@ -33,7 +33,7 @@ const ScoreboardWrap = styled.div`
 `;
 
 
-const nameTable = {
+export const nameTable = {
     normal: "CURRENT",
     optimistic: "OPTIMISTIC",
     pessimistic: "PESSIMISTIC",
@@ -222,7 +222,7 @@ PositionedScoreboardRow.propTypes = {
     children: PropTypes.node
 };
 
-const extractScoreboardRows = (data, selectedGroup) =>
+export const extractScoreboardRows = (data, selectedGroup) =>
     data.rows.filter(t => selectedGroup === "all" || (t?.teamGroups ?? []).includes(selectedGroup));
 
 /**
@@ -233,7 +233,7 @@ const extractScoreboardRows = (data, selectedGroup) =>
  * @param {number} startFromRow - row to start from inclusive
  * @param {number} numRows - row to end to inclusive
  */
-const useScoller = (totalRows,
+export const useScoller = (totalRows,
     singleScreenRowCount,
     scrollInterval,
     startFromRow,

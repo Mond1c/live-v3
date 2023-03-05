@@ -10,7 +10,7 @@ import {
     QUEUE_ROW_FEATURED_RUN_ADDITIONAL_DELAY,
     QUEUE_ROW_FEATURED_RUN_APPEAR_TIME,
     QUEUE_ROW_FTS_TRANSITION_TIME,
-    QUEUE_ROW_HEIGHT,
+    QUEUE_ROW_HEIGHT, QUEUE_ROW_HEIGHT_WITH_PADDING,
     QUEUE_ROW_TRANSITION_TIME
 } from "../../../config";
 import { QueueRow2 } from "../../molecules/queue/QueueRow2";
@@ -132,24 +132,24 @@ export const Queue2 = ({ widgetData }) => {
         }
     }, [hasFeatured]);
     for (let queueEntry of _.sortBy(queue, [ e => e.result?.isFirstToSolveRun ?? false ])) {
-        let bottom = QUEUE_ROW_HEIGHT * queueRowsCount;
+        let bottom = QUEUE_ROW_HEIGHT_WITH_PADDING * queueRowsCount;
         if (queueEntry.result !== undefined && queueEntry.result.isFirstToSolveRun) {
             bottom += QUEUE_FTS_PADDING * (queueRowsCount > 0);
         }
         const featured = queueEntry.featuredRunMedia;
         if (featured !== undefined && featuredRunLoaded) {
-            bottom = height - featuredRunHeight - QUEUE_ROW_HEIGHT;
+            bottom = height - featuredRunHeight - QUEUE_ROW_HEIGHT_WITH_PADDING;
             queueRowsCount -= 1;
         }
         if (isJustShown) {
-            bottom = -QUEUE_ROW_HEIGHT;
+            bottom = -QUEUE_ROW_HEIGHT_WITH_PADDING;
         }
         const isEven = (totalQueueItems - queueRowsCount) % 2 === 0;
         const el = <Transition key={queueEntry.id} timeout={QUEUE_ROW_APPEAR_TIME}>
             {state => {
                 return state !== "exited" && <QueueRowWrap bottom={bottom}
                     zindex={featured !== undefined ? 2147000000 : queueEntry.time}
-                    {...contractionStates(QUEUE_ROW_HEIGHT)[state]}>
+                    {...contractionStates(QUEUE_ROW_HEIGHT_WITH_PADDING)[state]}>
                     <FeaturedRunRow
                         onLoad={() => setFeaturedRunLoaded(true)}
                         featured={featured}

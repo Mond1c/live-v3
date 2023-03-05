@@ -19,7 +19,7 @@ import {
     ProblemCell2, RankCell,
     TextShrinkingCell, VerdictCell
 } from "../../atoms/ContestCells";
-import { RankLabel2, RunStatusLabel2 } from "../../atoms/ContestCells2";
+import { RankLabel2, RunStatusLabel2 } from "../../atoms/ContestLabels2";
 import { FlexedBox2, ShrinkingBox2 } from "../../atoms/Box2";
 import { ContesterRow2 } from "../../atoms/ContesterRow2";
 import { CircleCell } from "../../atoms/CircleCellsProblem";
