@@ -84,6 +84,7 @@ export const CELL_BG_COLOR_ODD = "rgba(1, 1, 1, 0.9)";
 
 export const CELL_PROBLEM_LINE_WIDTH = "5px"; // css property
 export const CELL_QUEUE_VERDICT_WIDTH = "50px"; // css property
+
 export const CELL_QUEUE_RANK_WIDTH = "50px"; // css property
 export const CELL_QUEUE_TOTAL_SCORE_WIDTH = "35px"; // css property
 export const CELL_QUEUE_TASK_WIDTH = "32px"; // css property
@@ -135,4 +136,5 @@ export const CIRCLE_PROBLEM_SIZE = "28px";
 export const GLOBAL_BORDER_RADIUS = "16px";
 export const CIRCLE_PROBLEM_LINE_WIDTH = "3.5px";
 
+export const CELL_INFO_VERDICT_WIDTH = "100px"; // css property
 

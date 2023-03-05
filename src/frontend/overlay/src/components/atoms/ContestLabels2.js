@@ -141,12 +141,12 @@ RunStatusLabel2.propTypes = {
 };
 
 // TODO: fts
-const ICPCTaskResultLabel2 = ({ problemResult: r }) => {
+const ICPCTaskResultLabel2 = ({ problemResult: r, ...props }) => {
     const status = getStatus(r.isFirstToSolve, r.isSolved, r.pendingAttempts, r.wrongAttempts);
     const attempts = r.wrongAttempts + r.pendingAttempts;
     return <>
         {/*{status === TeamTaskStatus.first && <StarIcon/>}*/}
-        <Box2 color={TeamTaskColor2[status]} fontWeight={"bold"}>
+        <Box2 color={TeamTaskColor2[status]} fontWeight={"bold"} {...props}>
             {TeamTaskSymbol[status]}
             {status !== TeamTaskStatus.untouched && attempts > 0 && attempts}
         </Box2>
@@ -157,10 +157,10 @@ ICPCTaskResultLabel2.propTypes = {
     problemResult: ICPCTaskResult,
 };
 
-const IOITaskResultLabel2 = ({ problemResult: r, minScore, maxScore }) => {
+const IOITaskResultLabel2 = ({ problemResult: r, minScore, maxScore,  ...props }) => {
     // const status = getStatus(r.isFirstToSolve, r.isSolved, r.pendingAttempts, r.wrongAttempts);
     // const attempts = r.wrongAttempts + r.pendingAttempts;
-    return <Box2 color={getTeamTaskColor2(r.score, minScore, maxScore)} fontWeight={"bold"}>
+    return <Box2 color={getTeamTaskColor2(r.score, minScore, maxScore)} fontWeight={"bold"} { ...props}>
         {formatScore(r?.score)}
     </Box2>;
 };

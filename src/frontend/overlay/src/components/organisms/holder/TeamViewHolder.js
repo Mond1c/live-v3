@@ -19,8 +19,9 @@ import { StarIcon } from "../../atoms/Star";
 import { formatScore } from "../../atoms/ContestCells";
 import { ScoreboardIOITaskCell } from "../widgets/Scoreboard";
 import { Box2 } from "../../atoms/Box2";
-import { TimeLine } from "../widgets/TimeLine";
-import { StarIcon2 } from "../../atoms/Star2";
+import SubmissionRow from "../../molecules/info/SubmissionRow";
+import { ContesterInfo2 } from "../../molecules/info/ContesterInfo2";
+import { ContesterCorner2 } from "../../molecules/info/ContesterCorner2";
 
 const NUMWIDTH = 80;
 const NAMEWIDTH = 300;
@@ -137,16 +138,17 @@ export const TimeCell = styled(Box2)`
   padding-top: 5px;
   opacity: 100%;
   font-size: 12pt;
+  text-align: center;
 `;
 
-export function getStatus(isFirstToSolve, isSolved, pendingAttempts, wrongAttempts) {
-    if (isFirstToSolve) {
+export function getStatus(result) {
+    if (result?.isFirstToSolve) {
         return TeamTaskStatus.first;
-    } else if (isSolved) {
+    } else if (result?.isSolved) {
         return TeamTaskStatus.solved;
-    } else if (pendingAttempts > 0) {
+    } else if (result?.pendingAttempts > 0) {
         return TeamTaskStatus.unknown;
-    } else if (wrongAttempts > 0) {
+    } else if (result?.wrongAttempts > 0) {
         return TeamTaskStatus.failed;
     } else {
         return TeamTaskStatus.untouched;
@@ -176,14 +178,7 @@ const TaskRow = styled.div`
 
 
 const ScoreboardColumn = ({ teamId, isSmall }) => {
-    let scoreboardData = useSelector((state) => state.scoreboard[SCOREBOARD_TYPES.normal]?.ids[teamId]);
-    for (let i = 0; i < scoreboardData?.problemResults.length; i++) {
-        scoreboardData.problemResults[i]["index"] = i;
-    }
-    const tasks = useSelector(state => state.contestInfo?.info?.problems);
-    const contestData = useSelector((state) => state.contestInfo.info);
-
-    return <TimeLine scoreboardData={scoreboardData}/>;
+    return <ContesterCorner2 teamId={teamId} isSmall={isSmall}/>;
     // if (scoreboardData?.problemResults[0].type === "icpc") {
     //     return <ScoreboardColumnWrapper isSmall={isSmall}>
     //         <ScoreboardTeamInfoRow>
@@ -225,6 +220,7 @@ const ScoreboardColumn = ({ teamId, isSmall }) => {
     //         )}
     //     </ScoreboardColumnWrapper>;
     // }
+
 };
 
 export const TeamInfo = ({ teamId }) => {

@@ -11,10 +11,4 @@ export const LOCATIONS = {
         sizeX: 384,
         sizeY: 648,
     },
-    TeamViewWidget: {
-        positionX: 0,
-        positionY: 0,
-        sizeX: 1920,
-        sizeY: 1080,
-    },
 };
