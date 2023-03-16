@@ -1,18 +1,13 @@
 import PropTypes from "prop-types";
-import React, { useCallback, useEffect, useRef } from "react";
+import React from "react";
 import styled from "styled-components";
 import {
-    CELL_NAME_LEFT_PADDING,
-    CELL_NAME_RIGHT_PADDING,
-    CELL_PROBLEM_LINE_WIDTH,
-    GLOBAL_DEFAULT_FONT,
-    MEDAL_COLORS,
     VERDICT_NOK2,
     VERDICT_OK2,
     VERDICT_UNKNOWN2,
-    SCORE_NONE_TEXT, CELL_TEXT_COLOR, CELL_QUEUE_RANK_WIDTH, VERDICT_OK, VERDICT_NOK, VERDICT_UNKNOWN
+    CELL_TEXT_COLOR,
+    CELL_QUEUE_RANK_WIDTH,
 } from "../../config";
-import { StarIcon } from "./Star";
 import { Box2, FlexedBox2, ShrinkingBox2, TextShrinking } from "./Box2";
 import { getStatus, getTeamTaskColor, TeamTaskStatus, TeamTaskSymbol } from "../../utils/statusInfo";
 import { formatScore, ICPCVerdict, IOIVerdict } from "./ContestCells";
@@ -33,7 +28,7 @@ export const IOITaskResult = PropTypes.shape({
 
 
 export const ICPCScoreCell = ({ score, Wrapper = FlexedBox2, ...props }) => {
-    return <ShrinkingBox2 Wrapper={FlexedBox2} text={ score ?? "??" } {...props}/>;
+    return <ShrinkingBox2 Wrapper={Wrapper} text={ score ?? "??" } {...props}/>;
 };
 
 ICPCScoreCell.propTypes = {
@@ -43,15 +38,18 @@ ICPCScoreCell.propTypes = {
 };
 
 
-export const IOIScoreCell = ({ score, minScore, maxScore, Wrapper = FlexedBox2, ...props }) => {
-    return <Wrapper {...props}><TextShrinking canGrow={false} canShrink={false} text={ score ?? "??" } color={ getTeamTaskColor(score, props.minScore, props.maxScore) ?? CELL_TEXT_COLOR }
-        background={getTeamTaskColor(score, props.minScore, props.maxScore)}/></Wrapper>;
+export const IOIScoreCell = ({ score, Wrapper = FlexedBox2, ...props }) => {
+    return <Wrapper {...props}>
+        <TextShrinking canGrow={false} canShrink={false} text={ score ?? "??" } color={ getTeamTaskColor(score, props.minScore, props.maxScore) ?? CELL_TEXT_COLOR }
+            background={getTeamTaskColor(score, props.minScore, props.maxScore)}/>
+    </Wrapper>;
 };
 
 
 export const QueueStatusCell = ({ data, score, ...props }) => {
     return data.type === "icpc" ? <ICPCScoreCell score={score} color={data.isAccepted ? VERDICT_OK2 : VERDICT_NOK2} {...props}/> :
-        <ICPCScoreCell score={data.difference > 0 ? `+${formatScore(data.difference, 1)}` : (data.difference < 0 ? `-${formatScore(-data.difference, 1)}` : "=")} color={data.difference > 0 ? VERDICT_OK2 : (data.difference < 0 ? VERDICT_NOK2 : VERDICT_UNKNOWN2)} {...props}/>;
+        <ICPCScoreCell score={data.difference > 0 ? `+${formatScore(data.difference, 1)}` : (data.difference < 0 ? `-${formatScore(-data.difference, 1)}` : "=")}
+            color={data.difference > 0 ? VERDICT_OK2 : (data.difference < 0 ? VERDICT_NOK2 : VERDICT_UNKNOWN2)} {...props}/>;
 };
 
 const ICPCVerdictLabel = ({ runResult, ...props }) => {
@@ -64,10 +62,10 @@ ICPCVerdictLabel.propTypes = {
 };
 
 const IOIVerdictLabel = ({ runResult: { wrongVerdict, difference }, ...props }) => {
-    const diffColor = difference > 0 ? VERDICT_OK : (difference < 0 ? VERDICT_NOK : VERDICT_UNKNOWN);
+    const diffColor = difference > 0 ? VERDICT_OK2 : (difference < 0 ? VERDICT_NOK2 : VERDICT_UNKNOWN2);
     const diffText = difference > 0 ? `+${formatScore(difference, 1)}` : (difference < 0 ? `-${formatScore(-difference, 1)}` : "=");
     return <>
-        {wrongVerdict !== undefined && <ShrinkingBox2 text={wrongVerdict ?? "??"} color={VERDICT_NOK} {...{ Wrapper: FlexedBox2, ...props }}/>}
+        {wrongVerdict !== undefined && <ShrinkingBox2 text={wrongVerdict ?? "??"} color={VERDICT_NOK2} {...{ Wrapper: FlexedBox2, ...props }}/>}
         {wrongVerdict === undefined && <ShrinkingBox2 text={diffText ?? "??"} color={diffColor} {...{ Wrapper: FlexedBox2, ...props }}/>}
     </>;
 };
@@ -125,7 +123,7 @@ VerdictCellInProgress2.PropTypes = {
     percentage: PropTypes.number.isRequired
 };
 
-export const RunStatusLabel2 = ({ Wrapper, runInfo, ...props }) => {
+export const RunStatusLabel2 = ({ runInfo, ...props }) => {
     return <>
         {runInfo.result === undefined && <VerdictCellInProgress2 percentage={runInfo.percentage} align={"center"} {...props}/>}
         {runInfo.result !== undefined && <VerdictLabel2 runResult={runInfo.result} score={runInfo.result.result} align={"center"} {...props}/>}

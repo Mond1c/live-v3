@@ -209,7 +209,7 @@ const PositionedScoreboardRowWrap = styled.div.attrs(({ zIndex }) => ({
   position: relative;
 `;
 
-const PositionedScoreboardRow = ({ zIndex, children, ...rest }) => {
+export const PositionedScoreboardRow = ({ zIndex, children, ...rest }) => {
     return <PositionedScoreboardRowWrap zIndex={zIndex}>
         <ScoreboardRowWrap {...rest}>
             {children}
