@@ -2,18 +2,22 @@
   "freezeTimeSeconds": 14400,
   "teamMediaTemplate": {
     "screen": {
-      "type": "Video",    
+      "type": "Video",
       "url": "http://192.168.18.38:80{teamId}"
     },
     "camera": {
-      "type": "Video",    
+      "type": "Video",
       "url": "http://192.168.18.38:81{teamId}"
+    },
+    "achievement": {
+      "type": "Photo",
+      "url": "http://localhost:8080/api/overlay/svgAchievement/easy-achivements.svg?teamId={teamId}"
     }
   },
   "teamOverrides": {
 "486860": {"shortname": "SPb HSE 1: Lemon Tree", "groups": ["SPb HSE", "SPb"]},
 "486861": {"shortname": "SPb ITMO: Insert your name", "groups": ["SPb ITMO", "SPb"]},
-"486862": {"shortname": "HSE: Overtrained", "groups": ["HSE", "Moscow"]},
+"486862": {"shortname": "HSE: Overtrained", "groups": ["HSE", "Moscow"], "additionalInfo": "Safonov | Gorokhovskii | Fedoseev"},
 "486863": {"shortname": "HSE: Sleeveless shorts", "groups": ["HSE", "Moscow"]},
 "486864": {"shortname": "Moscow IPT: Malaya Bronnaya", "groups": ["Moscow IPT", "Moscow"]},
 "486865": {"shortname": "St. Petersburg SU: Cheba Kings", "groups": ["St. Petersburg SU", "SPb"]},
