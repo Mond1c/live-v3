@@ -6,6 +6,7 @@ import SubmissionRow from "./SubmissionRow";
 import React from "react";
 import styled from "styled-components";
 import { TEAMVIEW_SMALL_FACTOR } from "../../../config";
+import { TimeLine } from "../../organisms/widgets/TimeLine";
 
 const ScoreboardColumnWrapper = styled.div`
   display: grid;
@@ -35,7 +36,7 @@ export const ContesterCorner2 = ({ teamId, isSmall }) => {
     const tasks = useSelector(state => state.contestInfo?.info?.problems);
     const contestData = useSelector((state) => state.contestInfo.info);
 
-    //return <TimeLine scoreboardData={scoreboardData}/>;
+    // return <TimeLine scoreboardData={scoreboardData}/>;
 
     return <ScoreboardColumnWrapper isSmall={isSmall}>
         <ScoreboardTeamInfoRow>

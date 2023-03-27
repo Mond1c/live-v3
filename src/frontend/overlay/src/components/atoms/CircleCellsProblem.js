@@ -25,8 +25,8 @@ export const CircleCell = ({ content, borderColor, backgroundColor, radius }) =>
     </CircleCellProblemWrap>;
 };
 
-export const CircleCellProblem = ({ status, probData, radius }) => {
-    return <CircleCell content={<div>{status === TeamTaskStatus.first && <StarIcon2/>} {probData?.letter ?? "??"}</div>} borderColor={probData?.color ?? "black"} backgroundColor={TeamTaskColor[status]} radius={radius}/>;
+export const CircleCellProblem = ({ backgroundColor, status, probData, radius }) => {
+    return <CircleCell backgroundColor={backgroundColor} content={<div>{status === TeamTaskStatus.first && <StarIcon2/>} {probData?.letter ?? "??"}</div>} borderColor={probData?.color ?? "black"} radius={radius}/>;
 };
 
 

@@ -20,7 +20,6 @@ import Locator from "../organisms/widgets/Locator";
 import { LOCATIONS } from "icpc-live-v3/src/locations";
 import { OVERLAY_VERSION } from "icpc-live-v3/src/config";
 import { Queue2 } from "../organisms/widgets/Queue2";
-import { TimeLine } from "../organisms/widgets/TimeLine";
 import Scoreboard2 from "../organisms/widgets/Scoreboard2";
 
 const fadeIn = keyframes`

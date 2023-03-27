@@ -48,27 +48,32 @@ const LineBackground = styled.div`
 // scoreboardData you may get from TeamViewHolder.js 152 str
 export const TimeLine = ({ scoreboardData }) => {
     const tasks = useSelector(state => state.contestInfo?.info?.problems);
+    const contestData = useSelector((state) => state.contestInfo.info);
     const contestInfo = useSelector((state) => state.contestInfo?.info);
     const milliseconds = DateTime.fromMillis(contestInfo?.startTimeUnixMs ?? 0).diffNow().negate().milliseconds *
         (contestInfo?.emulationSpeed ?? 1);
     let procentOfLine = (100 * 0.96 * milliseconds / 18000000) + "%"; // I point on 0.96 because in another case, gradient will be further than circle
+
     return (
         <Background>
             <LineBackground>
                 <Line procentOfLine={procentOfLine}/>
             </LineBackground>
-            {_.sortBy(scoreboardData?.problemResults, "lastSubmitTimeMs").flatMap(({
-                wrongAttempts,
-                pendingAttempts,
-                isSolved,
-                isFirstToSolve,
-                lastSubmitTimeMs,
-                index }, i) => {
-                return getStatus(isFirstToSolve, isSolved, pendingAttempts, wrongAttempts) === TeamTaskStatus.untouched ? null :
-                    <Run probData={tasks[index]}
-                        status={getStatus(isFirstToSolve, isSolved, pendingAttempts, wrongAttempts)}
-                        lastSubmitTimeMs={lastSubmitTimeMs}
-                        resultAttempts={wrongAttempts + pendingAttempts}/>;
+            {_.sortBy(scoreboardData?.problemResults, "lastSubmitTimeMs").flatMap((result, i) => {
+                let index = result.index;
+                let pendingAttempts = result.pendingAttempts;
+                let wrongAttempts = result.wrongAttempts;
+                let lastSubmitTimeMs = result.lastSubmitTimeMs;
+
+                if (lastSubmitTimeMs === undefined) return null;
+                // if (getStatus(result) === TeamTaskStatus.untouched) return null;
+                return <Run result={result}
+                    lastSubmitTimeMs={lastSubmitTimeMs}
+                    backgroundColor={/*tasks[result?.index]?.color ??*/ "black"}
+                    minScore={contestData?.problems[index]?.minScore}
+                    maxScore={contestData?.problems[index]?.maxScore}
+                    probData={tasks[index]}
+                    resultAttempts={wrongAttempts + pendingAttempts}/>;
             }
             )}
         </Background>
