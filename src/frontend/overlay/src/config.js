@@ -1,5 +1,5 @@
 // Version
-export const OVERLAY_VERSION = process.env.PUBLIC_URL === "/overlay2" ? "2" : "1";
+export const OVERLAY_VERSION = (process.env.PUBLIC_URL === "/overlay2"|| process.env.REACT_APP_VERSION === "2") ? "2" : "1";
 
 // Strings
 const WS_PROTO = window.location.protocol === "https:" ? "wss://" : "ws://";
