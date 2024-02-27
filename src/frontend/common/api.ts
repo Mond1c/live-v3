@@ -72,6 +72,8 @@ export interface TeamInfo {
   isHidden: boolean;
   isOutOfContest: boolean;
   organizationId: string | null;
+  addedScore?: number;
+  addedPenalty?: number;
   customFields?: { [key: string]: string };
 }
 
