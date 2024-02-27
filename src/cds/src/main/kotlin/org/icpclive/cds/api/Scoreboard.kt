@@ -67,9 +67,9 @@ public data class LegacyScoreboard(
 
 @Serializable
 public data class ScoreboardRow(
-    val totalScore: Double,
+    var totalScore: Double,
     @Serializable(with = DurationInSecondsSerializer::class)
-    val penalty: Duration,
+    var penalty: Duration,
     @Serializable(with = DurationInMillisecondsSerializer::class)
     @SerialName("lastAcceptedMs")
     val lastAccepted: Duration,

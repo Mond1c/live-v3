@@ -380,7 +380,9 @@ private fun List<TeamInfo>.mergeTeams(overrides: Map<String, TeamInfoOverride>?)
         customFields = mergeMaps(team.customFields, override.customFields ?: emptyMap()),
         isHidden = override.isHidden ?: team.isHidden,
         isOutOfContest = override.isOutOfContest ?: team.isOutOfContest,
-        organizationId = override.organizationId ?: team.organizationId
+        organizationId = override.organizationId ?: team.organizationId,
+        addedScore = override.addedScore ?: 0.0,
+        addedPenalty = override.addedPenalty ?: 0
     )
 }
 

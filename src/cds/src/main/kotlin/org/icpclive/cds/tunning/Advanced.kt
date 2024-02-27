@@ -32,6 +32,8 @@ public class TeamInfoOverride(
     public val customFields: Map<String, String>? = null,
     public val isHidden: Boolean? = null,
     public val isOutOfContest: Boolean? = null,
+    public val addedScore: Double? = null,
+    public val addedPenalty: Int? = null,
 )
 
 /**
@@ -225,7 +227,9 @@ public fun ContestInfo.toAdvancedProperties(fields: Set<String>): AdvancedProper
                 medias = it.medias.takeIfAsked("medias"),
                 customFields = it.customFields.takeIfAsked("customFields"),
                 isHidden = it.isHidden.takeIfAsked("teamIsHidden"),
-                isOutOfContest = it.isOutOfContest.takeIfAsked("isOutOfContest")
+                isOutOfContest = it.isOutOfContest.takeIfAsked("isOutOfContest"),
+                addedScore = it.addedScore.takeIfAsked("addedScore"),
+                addedPenalty = it.addedPenalty.takeIfAsked("addedPenalty")
             )
         },
         problemOverrides = problemList.associate {

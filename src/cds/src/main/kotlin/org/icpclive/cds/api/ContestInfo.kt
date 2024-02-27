@@ -165,6 +165,8 @@ public data class TeamInfo(
     val isHidden: Boolean,
     val isOutOfContest: Boolean,
     val organizationId: String?,
+    val addedScore: Double = 0.0,
+    val addedPenalty: Int = 0,
     val customFields: Map<String, String> = emptyMap(),
 )
 

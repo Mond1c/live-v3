@@ -8,7 +8,7 @@ import org.icpclive.cds.*
 import org.icpclive.cds.adapters.*
 import org.icpclive.cds.api.*
 import org.icpclive.util.getLogger
-import kotlin.time.Duration
+import kotlin.time.*
 
 public class Ranking internal constructor(
     public val order: List<Int>,
@@ -265,10 +265,13 @@ public fun Flow<ContestUpdate>.calculateScoreboard(optimismLevel: OptimismLevel)
                     ScoreboardUpdateType.SNAPSHOT -> task.info.teams
                 }.keys.filterNot { task.info.teams[it]!!.isHidden }
                 val upd = teams.associateWithTo(persistentMapOf<Int, ScoreboardRow>().builder()) {
-                    calculator.getScoreboardRow(
+                    val a = calculator.getScoreboardRow(
                         task.info,
                         task.runs[it] ?: emptyList()
                     )
+                    a.penalty += task.info.teams[it]?.addedPenalty?.toDuration(DurationUnit.MINUTES) ?: Duration.ZERO
+                    a.totalScore += task.info.teams[it]?.addedScore ?: 0.0
+                    a
                 }.build()
                 rows = if (task.mode == ScoreboardUpdateType.SNAPSHOT) {
                     upd
